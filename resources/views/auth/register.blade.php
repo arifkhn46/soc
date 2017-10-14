@@ -13,8 +13,8 @@
                         <div class="control">
                             <input class="input {{ $errors->has('name') ? ' is-danger' : '' }}" type="text" value="{{ old('name') }}" id="name" name="name" required autofocus>
                         </div>
-                        @if ($errors->has('email'))
-                            <p class="help is-danger">{{ $errors->first('email') }}</p>                        
+                        @if ($errors->has('name'))
+                            <p class="help is-danger">{{ $errors->first('name') }}</p>                        
                         @endif
                     </div>
                     <div class="field">
@@ -22,7 +22,7 @@
                         <div class="control">
                             <input class="input {{ $errors->has('email') ? ' is-danger' : '' }}" type="text" placeholder="user@example.com" value="{{ old('email') }}" id="email" name="email" required>
                         </div>
-                        @if ($errors->has('name'))
+                        @if ($errors->has('email'))
                             <p class="help is-danger">{{ $errors->first('email') }}</p>                        
                         @endif
                     </div>

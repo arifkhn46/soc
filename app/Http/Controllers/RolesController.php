@@ -8,13 +8,23 @@ use Illuminate\Http\Request;
 class RolesController extends Controller
 {
     /**
+     * Constructor of RolesController class.
+     */
+    public function __construct()
+    {
+        $this->middleware('admin');
+    }
+
+    /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
     public function index()
     {
-        //
+        $roles = Role::all();
+        return view('roles.index', compact('roles'));
+
     }
 
     /**
@@ -24,7 +34,7 @@ class RolesController extends Controller
      */
     public function create()
     {
-        //
+        return view('roles.create');
     }
 
     /**
@@ -38,7 +48,10 @@ class RolesController extends Controller
         $this->validate($request, [
             'name' => 'required',
         ]);
-        Role::create($request->toArray());
+        
+        $role = Role::create($request->toArray());
+        
+        return back()->with('flash', "The Role {$role->name} has been created");
     }
 
     /**

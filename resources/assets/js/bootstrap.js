@@ -8,8 +8,9 @@ window._ = require('lodash');
  */
 
 try {
+    const WOW = require('wowjs');    
     window.$ = window.jQuery = require('jquery');
-    const WOW = require('wowjs');
+    window.Vue = require('vue');        
     window.wow = new WOW.WOW({
         live: false
     });
@@ -54,3 +55,9 @@ if (token) {
 //     broadcaster: 'pusher',
 //     key: 'your-pusher-key'
 // });
+
+window.events = new Vue();
+
+window.flash = function (message, level = 'success') {
+    window.events.$emit('flash', { message, level});
+};

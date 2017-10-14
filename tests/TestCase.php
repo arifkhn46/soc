@@ -10,6 +10,11 @@ abstract class TestCase extends BaseTestCase
 {
     use CreatesApplication;
 
+    /**
+     * Admin user.
+     */
+    protected $admin;
+
     protected function setUp()
     {
         parent::setUp();
@@ -21,6 +26,15 @@ abstract class TestCase extends BaseTestCase
         $user = $user ?: create('App\User');
         $this->actingAs($user);
         return $this;
+    }
+
+    protected function signInAsAdmin()
+    {
+        $role = create('App\Role', ['name' => 'admin']); 
+        $admin = create('App\User');
+        $admin->attachRole($role->id);
+        $this->actingAs($admin);
+        return $admin;
     }
 
     protected function disableExceptionHandling()

@@ -21,6 +21,10 @@
         
         @include('layouts.nav')
 
+        @if ($isAdmin)
+            Admins
+        @endif
+
         @yield('content')
 
         <flash message="{{ session('flash') }}"></flash>

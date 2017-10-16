@@ -3,7 +3,6 @@
 namespace App\Http\Middleware;
 
 use Closure;
-use Illuminate\Support\Facades\Auth;
 
 class IsAdmin
 {
@@ -16,7 +15,7 @@ class IsAdmin
      */
     public function handle($request, Closure $next)
     {
-        if (Auth::user() &&  Auth::user()->hasRole(1)) {
+        if (auth()->user() &&  auth()->user()->hasRole(1)) {
             return $next($request);
         }
 

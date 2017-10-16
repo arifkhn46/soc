@@ -52,4 +52,12 @@ class User extends Authenticatable
     {
         return $this->roles()->where('id', $roleId)->exists();
     }
+    
+    /**
+     * Check if a user is admin.
+     */
+    public function isAdmin()
+    {
+        return $this->hasRole(1);
+    }
 }

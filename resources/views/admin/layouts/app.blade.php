@@ -31,7 +31,7 @@
 <body>
     <div id="app">
         @include('admin.layouts.nav')    
-        <div class="container admin-container">
+        <div class="container is-fluid admin-container">
             <div class="columns">
                 <div class="column is-3">
                     @include('admin.layouts.side_nav')    

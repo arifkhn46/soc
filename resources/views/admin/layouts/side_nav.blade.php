@@ -4,8 +4,9 @@
   </p>
   <ul class="menu-list">
     <li class="menu-item">
-      <a class="menu-link {{ Request::is('roles/*') ? 'is-active' : '' }}">Role</a>
+      <a class="menu-link {{ Request::is('roles/*') || Request::is('roles') ? 'is-active' : '' }}">Role</a>
         <ul>
+          <li><a href="{{ route('roles.list') }}">List</a></li>
           <li><a href="{{ route('roles.create') }}">Create</a></li>
         </ul>
       </a>

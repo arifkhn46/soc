@@ -1,16 +1,25 @@
 @extends('admin.layouts.app')
 
 @section('content')
-    <div class="container admin-container">
-        <div class="columns">
-            <div class="column is-half is-offset-one-quarter">
-                <h2 class="has-text-centered has-text-primary">Roles</h2>
-                    <ul>
-                        @foreach ($roles as $role)
-                            <li>{{ $role->name }}</li>
-                        @endforeach
-                    </ul>
-            </div>
+    <div class="columns">
+        <div class="column">
+            <h2 class="title">Roles</h2>
+            <table class="table is-bordered is-striped  is-fullwidth">
+                <thead>
+                    <tr>
+                        <th>S.N</th>
+                        <th>Name</th>
+                    </tr>
+                </thead>
+                <tfoot>
+                    @foreach ($roles as $role)
+                        <tr>
+                            <td>1</td>
+                            <td>{{ $role->name }}</td>
+                        </tr>
+                    @endforeach
+                </tfoot>
+            </table>    
         </div>
     </div>
 @endsection

@@ -14,7 +14,6 @@ class ComposerServiceProvider extends ServiceProvider {
     public function boot(ViewFactory $view)
     {
 
-        $view->composer('*', 'App\Http\ViewComposers\AdminComposer'); 
 
     }
 

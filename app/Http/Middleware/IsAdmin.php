@@ -15,7 +15,8 @@ class IsAdmin
      */
     public function handle($request, Closure $next)
     {
-        if (auth()->user() &&  auth()->user()->hasRole(1)) {
+        if (auth()->user() &&  auth()->user()->isAdmin()) {
+            view()->share('isAdmin', true);
             return $next($request);
         }
 

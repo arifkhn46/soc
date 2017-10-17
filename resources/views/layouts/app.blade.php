@@ -22,7 +22,7 @@
         @include('layouts.nav')
 
         @if ($isAdmin)
-            Admins
+            @include('layouts.admin.side_nav')
         @endif
 
         @yield('content')

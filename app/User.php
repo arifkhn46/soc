@@ -58,6 +58,6 @@ class User extends Authenticatable
      */
     public function isAdmin()
     {
-        return $this->hasRole(1);
+        return $this->id == 1;
     }
 }

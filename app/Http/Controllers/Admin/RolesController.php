@@ -1,19 +1,13 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Admin;
 
 use App\Role;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
 
 class RolesController extends Controller
 {
-    /**
-     * Constructor of RolesController class.
-     */
-    public function __construct()
-    {
-        $this->middleware('admin');
-    }
 
     /**
      * Display a listing of the resource.

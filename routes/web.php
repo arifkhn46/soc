@@ -17,7 +17,12 @@ Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 
-//RolesController
-Route::post('/roles', 'RolesController@store')->name('roles.store');
-Route::get('/roles/create', 'RolesController@create')->name('roles.create');
-Route::get('/roles', 'RolesController@index')->name('roles.list');
+
+Route::group(['namespace' => 'Admin', 'prefix' => 'admin', 'middleware' => ['admin']], function()
+{
+    //RolesController
+    Route::post('roles', 'RolesController@store')->name('roles.store');
+    Route::get('roles/create', 'RolesController@create')->name('roles.create');
+    Route::get('roles', 'RolesController@index')->name('roles.list');
+    
+});

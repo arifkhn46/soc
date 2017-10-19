@@ -20,9 +20,11 @@ Route::get('/home', 'HomeController@index')->name('home');
 
 Route::group(['namespace' => 'Admin', 'prefix' => 'admin', 'middleware' => ['admin']], function()
 {
-    //RolesController
+    //Roles Routes
     Route::post('roles', 'RolesController@store')->name('roles.store');
     Route::get('roles/create', 'RolesController@create')->name('roles.create');
     Route::get('roles', 'RolesController@index')->name('roles.list');
-    
+
+    //Course Routes
+    Route::post('courses', 'CoursesController@store')->name('course.create');
 });

@@ -8,7 +8,7 @@ use Illuminate\Foundation\Testing\RefreshDatabase;
 class ComposeCourseTest extends TestCase
 {
     use RefreshDatabase;
-    
+
     /**
      * Setup necessary things before start executing tests.
      */
@@ -21,7 +21,8 @@ class ComposeCourseTest extends TestCase
     /** @test */
     public function admin_can_create_a_course()
     {
-        
-
+        $course = make('App\Course');
+        $this->post(route('course.create'), $course->toArray());    
+        $this->assertDatabaseHas('courses', [ 'title' => $course->title]);
     }
 }

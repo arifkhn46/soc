@@ -60,10 +60,12 @@ class ComposeCourseTest extends TestCase
     }
 
     /** @test */
-    function admin_can_delete_a_course()
+    function admin_can_view_all_courses()
     {
-        $this->signInAsAdmin();
-        $this->assertDatabaseMissing('courses', [ 'id' => 1]);
+        $title = 'My course';
+        $this->createCourse(['title' => $title]);
+        $this->get(route('course.list'))
+            ->assertStatus(200);
     }
 
     /**

@@ -26,6 +26,7 @@ Route::group(['namespace' => 'Admin', 'prefix' => 'admin', 'middleware' => ['adm
     Route::get('roles', 'RolesController@index')->name('roles.list');
 
     //Course Routes
+    Route::get('courses', 'CoursesController@index')->name('course.list');
     Route::get('courses/create', 'CoursesController@create')->name('course.create');
     Route::post('courses', 'CoursesController@store')->name('course.store');
 });

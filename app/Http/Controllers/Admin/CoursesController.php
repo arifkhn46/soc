@@ -14,8 +14,25 @@ class CoursesController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store()
     {
-        Course::create($request->all());
+        $course = request()->validate([
+            'title' => 'required|min:4',
+            'description' => 'required'
+        ]);
+        
+        Course::create($course);
+        
+        return back();
+    }
+
+    /**
+     * Show the form for creating a new course.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function create()
+    {
+        return view('admin.courses.create');
     }
 }

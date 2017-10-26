@@ -10,5 +10,11 @@
           <li><a href="{{ route('roles.create') }}">Create</a></li>
         </ul>
       </a>
+      <a class="menu-link {{ Request::is('courses/*') || Request::is('courses') ? 'is-active' : '' }}">Courses</a>
+        <ul>
+          <li><a href="{{ route('course.create') }}">Create</a></li>
+        </ul>
+      </a>
+    </li>
   </ul>
 </aside>

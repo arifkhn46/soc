@@ -21,7 +21,7 @@
                                 @endif
                             </div>
                             <div class="control has-text-right">
-                                <button class="button  is-medium is-primary is-outlined">Create</button>
+                                <button class="button is-primary is-outlined">Create</button>
                             </div>
                         </form>
                     </div>

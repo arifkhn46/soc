@@ -1,13 +1,13 @@
 @extends('layouts.app')
 
 @section('content')
-<section class="hero is-fullheight">
+<section class="hero soc-app-form">
     <div class="hero-body">
         <div class="container has-text-centered">
             <div class="column is-4 is-offset-4">
                 <h3 class="title has-text-grey">Login</h3>
                 <div class="box">
-                    <form method="POST" action="{{ route('login') }}">
+                    <form method="POST" id="login-form" action="{{ route('login') }}">
                         {{ csrf_field() }}                
                         <div class="field">
                             <div class="control has-icons-left has-icons-right">
@@ -49,11 +49,6 @@
                         </a>
                     </form>
                 </div>
-                <p>
-                    <a href="../" class="has-text-grey">Sign Up</a> &nbsp;·&nbsp;
-                    <a href="../" class="has-text-grey">Forgot Password</a> &nbsp;·&nbsp;
-                    <a href="../" class="has-text-grey">Need Help?</a>
-                </p>
             </div>
         </div>
     </div>

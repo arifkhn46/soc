@@ -14953,6 +14953,10 @@ label.panel-block:hover {
   padding-top: 2em !important;
 }
 
+.pb-2 {
+  padding-bottom: 2em !important;
+}
+
 .is-padded {
   padding: 20px;
 }
@@ -14971,6 +14975,15 @@ label.panel-block:hover {
 .subtitle {
   line-height: 1.4;
   color: #919499;
+}
+
+.soc-subscribe-section .container {
+  padding-bottom: 82px;
+  border-bottom: 2px dashed #b7b7b7;
+}
+
+.footer-section {
+  background: #e2e4e7;
 }
 
 #login-form .help,

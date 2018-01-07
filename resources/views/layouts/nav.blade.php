@@ -14,9 +14,14 @@
         </div>
         <div id="soc-menu" class="navbar-menu">
             <div class="navbar-start">
-                <a class="navbar-item" href="#">
-                    Home
-                </a>
+                <div class="navbar-item has-dropdown is-hoverable">
+                    <a class="navbar-link">
+                        Courses
+                    </a>
+                    <div class="navbar-dropdown">
+                        <a class="navbar-item" href="{{ route('courses.create') }}">Create a courses</a>    
+                    </div>
+                </div>
             </div>
             <div class="navbar-end">
                 @guest

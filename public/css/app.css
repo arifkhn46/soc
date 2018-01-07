@@ -14986,6 +14986,10 @@ label.panel-block:hover {
   background: #e2e4e7;
 }
 
+.merg-img {
+  width: 200px;
+}
+
 #login-form .help,
 #registeration-form .help {
   text-align: left;

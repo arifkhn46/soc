@@ -6,19 +6,19 @@
     <div class="container">
       <div class="columns has-text-centered">
         <div class="column">
-          <img class="wow rollIn" data-wow-delay=".4s" src="{{ asset('images/a-z/M.png') }}" />
+          <img class="wow rollIn merg-img" data-wow-delay=".4s" src="{{ asset('images/a-z/M.png') }}" />
           <h5 class="title is-5">Mathematics</h5>
         </div>
         <div class="column">
-          <img class="wow rollIn" data-wow-delay=".4s" src="{{ asset('images/a-z/E.png') }}" />
+          <img class="wow rollIn merg-img" data-wow-delay=".4s" src="{{ asset('images/a-z/E.png') }}" />
           <h5 class="title is-5">English</h5>
         </div>
         <div class="column">
-          <img class="wow rollIn" data-wow-delay=".4s" src="{{ asset('images/a-z/R.png') }}" />
+          <img class="wow rollIn merg-img" data-wow-delay=".4s" src="{{ asset('images/a-z/R.png') }}" />
           <h5 class="title is-5">Reasoning</h5>
         </div>
         <div class="column">
-          <img class="wow rollIn" data-wow-delay=".4s" src="{{ asset('images/a-z/G.png') }}" />
+          <img class="wow rollIn merg-img" data-wow-delay=".4s" src="{{ asset('images/a-z/G.png') }}" />
           <h5 class="title is-5">General Knowledge</h5>
         </div>
       </div>
@@ -179,7 +179,7 @@
 <script>
   $(document).ready(function () {
     var wow = new WOW.WOW({ live: false });
-        // flkty = new Flickity( '.carousel', {});
+        // flkty = new Flickity( '.carousel ', {});
 
     wow.init();
   });

@@ -24,7 +24,7 @@ class CourseController extends Controller
      */
     public function create()
     {
-        //
+        return view('course.create');
     }
 
     /**
@@ -38,8 +38,9 @@ class CourseController extends Controller
         $course = $request->validate([
             'title' => 'required|min:4|unique:courses,title',
             'description' => 'required',
-            'user_id' => 'required|exists:users,id'
         ]);
+
+        $course['user_id'] = auth()->id();        
         
         $course = Course::create($course);
     }

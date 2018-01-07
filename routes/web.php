@@ -18,4 +18,5 @@ Auth::routes();
 Route::get('/home', 'HomeController@index')->name('home');
 
 // Courses Route
-Route::post('/courses/create', 'CourseController@store')->name('courses.create');
+Route::get('/courses/create', 'CourseController@create')->name('courses.create');
+Route::post('/courses/store', 'CourseController@store')->name('courses.store')->middleware('auth');

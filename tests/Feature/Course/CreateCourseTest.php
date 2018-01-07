@@ -10,10 +10,11 @@ class CreateCourseTest extends TestCase
     use RefreshDatabase;
 
     /** @test */
-    public function a_new_course_can_be_created() 
+    public function an_authenticated_user_can_create_a_course() 
     {
         $this->signIn();
-        $course = make('App\Course');
+        $examType = create('App\ExamType', ['user_id' => auth()->id()]);
+        $course = make('App\Course', ['exam_type_id' => $examType->id]);
         $response = $this->post(route('courses.store'), $course->toArray());
         $this->assertDatabaseHas('courses', ['title' => $course->title]);
     }

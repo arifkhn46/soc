@@ -2,11 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Course;
 use App\ExamType;
 use Illuminate\Http\Request;
 
-class CourseController extends Controller
+class ExamTypeController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -25,8 +24,7 @@ class CourseController extends Controller
      */
     public function create()
     {
-        $examTypes = ExamType::where('status', 1)->get();
-        return view('course.create', ['examTypes' => $examTypes]);
+        return view('exam_type.create');
     }
 
     /**
@@ -37,14 +35,15 @@ class CourseController extends Controller
      */
     public function store(Request $request)
     {
-        $course = $request->validate([
-            'title' => 'required|min:4|unique:courses,title',
+        $exam_type = request()->validate([
+            'title' => 'required|unique:exam_types,title',
             'description' => 'required',
-            'exam_type_id' => 'exists:exam_types,id'
         ]);
 
-        $course['user_id'] = auth()->id();        
-        $course = Course::create($course);
+        $exam_type['user_id'] = auth()->id();
+
+        ExamType::create($exam_type);
+
     }
 
     /**

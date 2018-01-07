@@ -8,11 +8,9 @@ window._ = require('lodash');
  */
 
 try {
+    window.WOW = require('wowjs');
+    window.Flickity = require('flickity');    
     window.$ = window.jQuery = require('jquery');
-    const WOW = require('wowjs');
-    window.wow = new WOW.WOW({
-        live: false
-    });
     require('animate.css');
 } catch (e) {}
 

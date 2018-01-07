@@ -96,6 +96,15 @@
           </div>
         </div>
       </div>
+      <!-- <div class="columns">
+        <div class="column">
+          <div class="carousel">
+            <div class="carousel-cell">A</div>
+            <div class="carousel-cell">B</div>
+            <div class="carousel-cell">B</div>
+          </div>
+        </div>
+      </div> -->
     </div>
   </div>
 </section>
@@ -165,4 +174,14 @@
     </div>
   </div>
 </section> 
+@endsection
+@section('scripts')
+<script>
+  $(document).ready(function () {
+    var wow = new WOW.WOW({ live: false });
+        // flkty = new Flickity( '.carousel', {});
+
+    wow.init();
+  });
+</script>
 @endsection

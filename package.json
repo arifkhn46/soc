@@ -21,6 +21,7 @@
   "dependencies": {
     "animate.css": "^3.5.2",
     "bulma": "^0.5.3",
+    "flickity": "^2.0.10",
     "wowjs": "^1.1.3"
   }
 }

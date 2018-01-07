@@ -26,10 +26,6 @@
 
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}"></script>
-    <script>
-        $(document).ready(function () {
-            window.wow.init();
-        });
-    </script>
+    @yield('scripts')
 </body>
 </html>

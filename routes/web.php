@@ -17,6 +17,10 @@ Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 
+// Exam type routes
+Route::get('/exam_type/create', 'ExamTypeController@create')->name('exam.type.create')->middleware('auth');
+Route::post('/exam_type/store', 'ExamTypeController@store')->name('exam.type.store')->middleware('auth');
+
 // Courses Route
-Route::get('/courses/create', 'CourseController@create')->name('courses.create');
+Route::get('/courses/create', 'CourseController@create')->name('courses.create')->middleware('auth');
 Route::post('/courses/store', 'CourseController@store')->name('courses.store')->middleware('auth');

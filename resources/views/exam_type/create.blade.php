@@ -5,9 +5,9 @@
     <div class="hero-body">
         <div class="container">
             <div class="column is-8">
-                <h4 class="title is-4 has-text-grey">Create a new course</h4>
+                <h4 class="title is-4 has-text-grey">Create new exam type</h4>
                 <div class="box">
-                  <form method="POST" action="{{ route('courses.store') }}" id="create-course-form">
+                  <form method="POST" action="{{ route('exam.type.store') }}" id="create-course-form">
                     {{ csrf_field() }}
                     <div class="field">
                         <div class="control">
@@ -20,21 +20,6 @@
                     <div class="field">
                         <div class="control">
                             <textarea class="textarea {{ $errors->has('title') ? ' is-danger' : '' }}" placeholder="Description" value="{{ old('title') }}" id="description" name="description"></textarea>
-                        </div>
-                        @if ($errors->has('description'))
-                            <p class="help is-danger">{{ $errors->first('description') }}</p>                        
-                        @endif
-                    </div>
-                    <div class="field">
-                        <div class="control">
-                            <div class="select">
-                                <select name="exam_type_id" id="exam_type_id" required>
-                                    <option value="">Select Exam Type:</option>
-                                    @foreach($examTypes as $examType)
-                                        <option value="{{ $examType->id }}" {{ old('exam_type_id') == $examType->id ? 'selected' : '' }}>{{ $examType->title }}</option>
-                                    @endforeach
-                                </select>
-                            </div>
                         </div>
                         @if ($errors->has('description'))
                             <p class="help is-danger">{{ $errors->first('description') }}</p>                        

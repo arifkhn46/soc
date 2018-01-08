@@ -2,7 +2,7 @@
 
 @section('content')
   <section class="hero soc-app-form">
-    <div class="hero-body">
+    <div>
         <div class="container">
             <div class="column is-8">
                 <h4 class="title is-4 has-text-grey">Create a new course</h4>

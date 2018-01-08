@@ -20,6 +20,7 @@ class CreateCoursesTable extends Migration
             $table->integer('exam_type_id')->unsigned();
             $table->integer('user_id')->unsigned();
             $table->timestamps();
+            $table->softDeletes();
 
             // Foreign key constraints
             $table->foreign('exam_type_id')

@@ -25,7 +25,7 @@ class CourseController extends Controller
      */
     public function create()
     {
-        $examTypes = ExamType::where('status', 1)->get();
+        $examTypes = ExamType::latest()->get();
         return view('course.create', ['examTypes' => $examTypes]);
     }
 

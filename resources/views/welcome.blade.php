@@ -31,7 +31,7 @@
       <div class="columns">
         <div class="column has-text-centered">
           <h4 class="title is-4 has-text-grey">Online Training & Preparation For Competitive Exams in India</h4>
-          <p class="subheading has-no-padding mb-1">Boost your exam preparation with SSCONLINECOACHING.COM</p>
+          <p class="subheading has-no-padding mb-1">Boost your exam preparation with {{ config('app.name', 'Laravel') }}</p>
         </div>
       </div>
       <div class="columns">
@@ -115,10 +115,10 @@
         <div>
           <div class="wow bounceInRight ml-1">
             <h4 class="title is-4 mb-1 has-text-grey" >
-              Thousands of students crack exams with SSCONLINECOACHING.COM
+              Thousands of students crack exams with {{ config('app.name', 'Laravel') }}
             </h4>
             <p class="subheading has-no-padding mb-1">
-              “Why should I join SSCONLINECOACHING.COM?” It's a fair enough question! Would
+              “Why should I join {{ config('app.name', 'Laravel') }}?” It's a fair enough question! Would
               hundreds upon hundreds of glowing endorsements help?
             </p> 
             <a href="/testimonials" class="button is-primary is-medium is-padded">
@@ -164,7 +164,7 @@
             SSCONLNECOACHING.COM
           </h3>
           <p class="footer-description is-heavy mb-3">
-            Lots of your peers think SSCONLINECOACHING.COM is one of the best things ever.
+            Lots of your peers think {{ config('app.name', 'Laravel') }} is one of the best things ever.
             level up your preparation in the process.
           </p>
         </div>

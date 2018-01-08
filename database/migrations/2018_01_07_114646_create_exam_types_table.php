@@ -18,9 +18,8 @@ class CreateExamTypesTable extends Migration
             $table->string('title')->unique();
             $table->text('description');
             $table->integer('user_id')->unsigned();
-            $table->boolean('status')->default(1);
             $table->timestamps();
-
+            $table->softDeletes();
 
             // Foreign key constraints
             $table->foreign('user_id')

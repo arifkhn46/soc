@@ -14,14 +14,21 @@
         </div>
         <div id="soc-menu" class="navbar-menu">
             <div class="navbar-start">
-                <div class="navbar-item has-dropdown is-hoverable">
-                    <a class="navbar-link">
-                        Courses
-                    </a>
-                    <div class="navbar-dropdown">
-                        <a class="navbar-item" href="{{ route('courses.create') }}">Create a courses</a>    
+                @guest 
+
+                @else
+                    <div class="navbar-item has-dropdown is-hoverable">
+                        <a class="navbar-link">
+                            Courses
+                        </a>
+                        <div class="navbar-dropdown">
+                            <a class="navbar-item" href="{{ route('courses.create') }}">Create a courses
+                            </a>    
+                        </div>
                     </div>
-                </div>
+                    <a class="navbar-item" href="{{ route('exam.type.create') }}">    Exam Types
+                    </a>
+                @endguest
             </div>
             <div class="navbar-end">
                 @guest

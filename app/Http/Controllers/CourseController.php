@@ -39,7 +39,7 @@ class CourseController extends Controller
     {
         $course = $request->validate([
             'title' => 'required|min:4|unique:courses,title',
-            'description' => 'required',
+            'description' => 'nullable',
             'exam_type_id' => 'exists:exam_types,id'
         ]);
 

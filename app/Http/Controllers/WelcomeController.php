@@ -13,7 +13,7 @@ class WelcomeController extends Controller
     	if (Auth::check()) {
     		return redirect('home');
     	}
-        $examTypes = ExamType::where('status', 1)->get();
+        $examTypes = ExamType::latest()->get();
         return view('welcome', ['examTypes' => $examTypes]);
     }
 }

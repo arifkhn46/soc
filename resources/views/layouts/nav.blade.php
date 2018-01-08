@@ -19,6 +19,15 @@
                 @else
                     <div class="navbar-item has-dropdown is-hoverable">
                         <a class="navbar-link">
+                            Dashboard
+                        </a>
+                        <div class="navbar-dropdown">
+                            <a class="navbar-item" href="{{ route('exam.type.create') }}">Exam Types
+                            </a>    
+                        </div>
+                    </div>
+                    <div class="navbar-item has-dropdown is-hoverable">
+                        <a class="navbar-link">
                             Courses
                         </a>
                         <div class="navbar-dropdown">
@@ -26,8 +35,6 @@
                             </a>    
                         </div>
                     </div>
-                    <a class="navbar-item" href="{{ route('exam.type.create') }}">    Exam Types
-                    </a>
                 @endguest
             </div>
             <div class="navbar-end">

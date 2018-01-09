@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use Auth;
-use App\ExamType;
+use App\CourseType;
 use Illuminate\Http\Request;
 
 class WelcomeController extends Controller
@@ -13,7 +13,7 @@ class WelcomeController extends Controller
     	if (Auth::check()) {
     		return redirect('home');
     	}
-        $examTypes = ExamType::latest()->get();
-        return view('welcome', ['examTypes' => $examTypes]);
+        $courseTypes = CourseType::latest()->get();
+        return view('welcome', ['courseTypes' => $courseTypes]);
     }
 }

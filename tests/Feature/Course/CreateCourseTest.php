@@ -44,7 +44,7 @@ class CreateCourseTest extends TestCase
     public function createCourse($overrides = [])
     {
         $this->withExceptionHandling()->signIn();
-        $examType = create('App\ExamType', ['user_id' => auth()->id()]);
+        $examType = create('App\CourseType', ['user_id' => auth()->id()]);
         $course = make('App\Course', $overrides + ['exam_type_id' => $examType->id]);
         $response = $this->post(route('courses.store'), $course->toArray());
         return $response;

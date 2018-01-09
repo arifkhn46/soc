@@ -7,7 +7,7 @@ $factory->define(App\Course::class, function (Faker $faker) {
         'title' => $faker->name,
         'description' => $faker->text(200),
         'exam_type_id' => function () {
-            return factory('App\ExamType')->create()->id;
+            return factory('App\CourseType')->create()->id;
         },
     ];
 });

@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Course;
-use App\ExamType;
+use App\CourseType;
 use Illuminate\Http\Request;
 
 class CourseController extends Controller
@@ -25,8 +25,8 @@ class CourseController extends Controller
      */
     public function create()
     {
-        $examTypes = ExamType::latest()->get();
-        return view('course.create', ['examTypes' => $examTypes]);
+        $courseTypes = CourseType::latest()->get();
+        return view('course.create', ['courseTypes' => $courseTypes]);
     }
 
     /**
@@ -40,7 +40,7 @@ class CourseController extends Controller
         $course = $request->validate([
             'title' => 'required|min:4|unique:courses,title',
             'description' => 'nullable',
-            'exam_type_id' => 'exists:exam_types,id'
+            'exam_type_id' => 'exists:course_types,id'
         ]);
 
         $course['user_id'] = auth()->id();        

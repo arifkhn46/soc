@@ -15,7 +15,9 @@ class CourseController extends Controller
      */
     public function index()
     {
-        //
+        $courses = Course::latest()->paginate(20);
+        $serialNumber = $courses->perPage() * ($courses->currentPage()-1);
+        return view('course.index', ['courses' => $courses, 'serialNumber' => $serialNumber]);
     }
 
     /**
@@ -40,10 +42,9 @@ class CourseController extends Controller
         $course = $request->validate([
             'title' => 'required|min:4|unique:courses,title',
             'description' => 'nullable',
-            'exam_type_id' => 'exists:course_types,id'
+            'course_type_id' => 'exists:course_types,id'
         ]);
-
-        $course['user_id'] = auth()->id();        
+        $course['user_id'] = auth()->id();      
         $course = Course::create($course);
     }
 

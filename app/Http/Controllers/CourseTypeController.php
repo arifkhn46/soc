@@ -24,7 +24,7 @@ class CourseTypeController extends Controller
      */
     public function create()
     {
-        return view('exam_type.create');
+        return view('course_type.create');
     }
 
     /**

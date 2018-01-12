@@ -15,7 +15,7 @@ class Course extends Model
      * @var array
      */
     protected $fillable = [
-        'title', 'description', 'exam_type_id', 'user_id',
+        'title', 'description', 'course_type_id', 'user_id',
     ];
 
      /**

@@ -24,3 +24,4 @@ Route::post('/course_type/store', 'CourseTypeController@store')->name('course.ty
 // Courses Route
 Route::get('/courses/create', 'CourseController@create')->name('courses.create')->middleware('auth');
 Route::post('/courses/store', 'CourseController@store')->name('courses.store')->middleware('auth');
+Route::get('/courses', 'CourseController@index')->name('courses.index')->middleware('auth');

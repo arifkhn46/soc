@@ -17,14 +17,14 @@ class CreateCoursesTable extends Migration
             $table->increments('id');
             $table->string('title')->unique();
             $table->text('description');
-            $table->integer('exam_type_id')->unsigned();
+            $table->integer('course_type_id')->unsigned();
             $table->integer('user_id')->unsigned();
             $table->timestamps();
             $table->softDeletes();
 
             // Foreign key constraints
-            $table->foreign('exam_type_id')
-                ->references('id')->on('exam_types');
+            $table->foreign('course_type_id')
+                ->references('id')->on('course_types');
             $table->foreign('user_id')
                 ->references('id')->on('users');
         });

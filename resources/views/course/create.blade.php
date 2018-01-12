@@ -30,8 +30,8 @@
                             <div class="select">
                                 <select name="exam_type_id" id="exam_type_id" required>
                                     <option value="">Select Exam Type:</option>
-                                    @foreach($examTypes as $examType)
-                                        <option value="{{ $examType->id }}" {{ old('exam_type_id') == $examType->id ? 'selected' : '' }}>{{ $examType->title }}</option>
+                                    @foreach($courseTypes as $courseType)
+                                        <option value="{{ $courseType->id }}" {{ old('exam_type_id') == $courseType->id ? 'selected' : '' }}>{{ $courseType->title }}</option>
                                     @endforeach
                                 </select>
                             </div>

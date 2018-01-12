@@ -22,8 +22,6 @@
                             Dashboard
                         </a>
                         <div class="navbar-dropdown">
-                            <a class="navbar-item" href="{{ route('exam.type.create') }}">Exam Types
-                            </a>    
                         </div>
                     </div>
                     <div class="navbar-item has-dropdown is-hoverable">
@@ -31,8 +29,8 @@
                             Courses
                         </a>
                         <div class="navbar-dropdown">
-                            <a class="navbar-item" href="{{ route('courses.create') }}">Create a courses
-                            </a>    
+                            <a class="navbar-item" href="{{ route('course.type.create') }}">Course Types</a>
+                            <a class="navbar-item" href="{{ route('courses.create') }}">Create a courses</a>
                         </div>
                     </div>
                 @endguest

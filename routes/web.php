@@ -18,10 +18,13 @@ Auth::routes();
 Route::get('/home', 'HomeController@index')->name('home');
 
 // Course type routes
-Route::get('/course_type/create', 'CourseTypeController@create')->name('course.type.create')->middleware('auth');
-Route::post('/course_type/store', 'CourseTypeController@store')->name('course.type.store')->middleware('auth');
+Route::get('/course_type/create', 'CourseTypeController@create')->name('course.types.create')->middleware('auth');
+Route::post('/course_type/store', 'CourseTypeController@store')->name('course.types.store')->middleware('auth');
 
 // Courses Route
 Route::get('/courses/create', 'CourseController@create')->name('courses.create')->middleware('auth');
 Route::post('/courses/store', 'CourseController@store')->name('courses.store')->middleware('auth');
 Route::get('/courses', 'CourseController@index')->name('courses.index')->middleware('auth');
+Route::get('/courses/{course}/edit', 'CourseController@edit')->name('courses.edit')->middleware('auth');
+Route::put('/courses/{course}', 'CourseController@update')->name('courses.update')->middleware('auth');
+Route::delete('/courses/{course}', 'CourseController@destroy')->name('courses.delete')->middleware('auth');

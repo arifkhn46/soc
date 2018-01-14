@@ -14,7 +14,7 @@ class CreateCourseTypeTest extends TestCase
     {
         $this->signIn();
         $courseType = make('App\CourseType');
-        $response = $this->post(route('course.type.store'), $courseType->toArray());
+        $response = $this->post(route('course.types.store'), $courseType->toArray());
         $this->assertDatabaseHas('course_types', ['title' => $courseType->title]);
     }
 }

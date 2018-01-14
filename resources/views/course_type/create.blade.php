@@ -7,7 +7,7 @@
             <div class="column is-8">
                 <h4 class="title is-4 has-text-grey">Create new exam type</h4>
                 <div class="box">
-                  <form method="POST" action="{{ route('exam.type.store') }}" id="create-course-form">
+                  <form method="POST" action="{{ route('course.types.store') }}" id="create-course-form">
                     {{ csrf_field() }}
                     <div class="field">
                         <div class="control">

@@ -29,8 +29,9 @@
                             Courses
                         </a>
                         <div class="navbar-dropdown">
-                            <a class="navbar-item" href="{{ route('course.type.create') }}">Course Types</a>
-                            <a class="navbar-item" href="{{ route('courses.create') }}">Create a courses</a>
+                            <a class="navbar-item" href="{{ route('course.types.create') }}">Crete course type</a>
+                            <a class="navbar-item" href="{{ route('courses.create') }}">Create a course</a>
+                            <a class="navbar-item" href="{{ route('courses.index') }}">Course list</a>
                         </div>
                     </div>
                 @endguest

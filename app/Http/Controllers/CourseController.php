@@ -44,8 +44,12 @@ class CourseController extends Controller
             'description' => 'nullable',
             'course_type_id' => 'exists:course_types,id'
         ]);
-        $course['user_id'] = auth()->id();      
+        $course['user_id'] = auth()->id();
         $course = Course::create($course);
+        return redirect()
+            ->back()
+            ->with('flash', "Course <i>{$course->title}</i> is being created.")
+            ->with('flash-class', 'is-primary');
     }
 
     /**
@@ -65,31 +69,55 @@ class CourseController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Course $course)
     {
-        //
+        $courseTypes = CourseType::latest()->get();
+        return view('course.edit', ['course' => $course, 'courseTypes' => $courseTypes]);
     }
 
     /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param  App\Course  $course
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Course $course)
     {
-        //
+        $validations = [
+            'title' => 'required|min:4',
+            'description' => 'nullable',
+            'course_type_id' => 'exists:course_types,id'
+        ];
+
+        if ($request->get('title') != $course->title) {
+            $validations['title'] .= '|unique:courses,title';
+            $course->title = $request->get('title');
+        }
+
+        $validatedCourse = $request->validate($validations);
+        $course->description = $request->get('description', $course->description);
+        $course->course_type_id = $request->get('course_type_id', $course->course_type_id);
+        $course->save();
+
+        return redirect()
+            ->back()
+            ->with('flash', "Course {$course->title} has been updated!")
+            ->with('flash-class', 'is-primary');
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param  App\Course  $course
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Course $course)
     {
-        //
+        $course->delete();
+        return redirect()
+            ->back()
+            ->with('flash', "Course {$course->title} has been deleted!")
+            ->with('flash-class', 'is-danger');
     }
 }

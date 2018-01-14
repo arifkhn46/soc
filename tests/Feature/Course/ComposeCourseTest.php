@@ -5,7 +5,7 @@ namespace Tests\Feature\Course;
 use Tests\TestCase;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 
-class publishCourseTest extends TestCase
+class ComposeCourseTest extends TestCase
 {
     use RefreshDatabase;
 
@@ -46,6 +46,27 @@ class publishCourseTest extends TestCase
         $this->publishCourse(['title' => $title]);
         $response = $this->get(route('courses.index'));
         $response->assertSee($title);
+    }
+
+    /** @test */
+    public function an_authenticated_user_can_update_a_course()
+    {
+        $title = "Course 1";
+        $updatedTitle = "Course 2";
+        $this->publishCourse([ 'id' => 1, 'title' => $title]);
+        $response = $this->put(route('courses.update', 1), ['title' => $updatedTitle, 'description' => 'Course 2 description']);
+        $response->assertSessionHas('flash');
+        $this->assertDatabaseHas('courses', ['title' => $updatedTitle]);        
+    }
+
+    /** @test */
+    public function an_authenticated_user_can_destroy_a_course()
+    {
+        $title = "Course 1";
+        $this->publishCourse(['id' => 1, 'title' => $title]);
+        $this->assertDatabaseHas('courses', ['title' => $title]);
+        $response = $this->delete(route('courses.delete', 1));
+        $response->assertSessionHas('flash');
     }
 
     /**

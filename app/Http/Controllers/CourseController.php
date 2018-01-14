@@ -15,7 +15,7 @@ class CourseController extends Controller
      */
     public function index()
     {
-        $courses = Course::latest()->paginate(20);
+        $courses = Course::withTrashed()->paginate(20);
         $serialNumber = $courses->perPage() * ($courses->currentPage()-1);
         return view('course.index', ['courses' => $courses, 'serialNumber' => $serialNumber]);
     }

@@ -21,7 +21,7 @@
                         <tfoot>
                             @foreach($courses as $key => $course)
                                 <tr>
-                                  <td><abbr title="Position">{{ $serialNumber + ($key+1) }}</abbr></td>
+                                  <td>{{ $serialNumber + ($key+1) }}</td>
                                   <td>{{ $course->title }}</td>
                                   <td>{{ $course->created_at }}</td>
                                   <td>{{ $course->updated_at }}</td>
@@ -29,7 +29,28 @@
                                   <td>
                                       <ul class="menu-list">
                                         <li><a class="button" href="{{ route('courses.edit', $course->id) }}">Edit</a></li>
-                                        <li><a class="button">Unpublish</a></li>
+                                        @if(!$course->deleted_at)
+                                            <li>
+                                                <a class="button" href="#" 
+                                                onclick="event.preventDefault();
+                                                        document.getElementById('course-unpublish-form-{{ $course->id }}').submit();">Unpublish</a>
+                                                <form id="course-unpublish-form-{{ $course->id }}" action="{{ route('courses.delete', $course->id) }}" method="POST" style="display: none;">
+                                                    {{ csrf_field() }}
+                                                    {{ method_field('DELETE') }}
+                                                </form>
+                                            </li>
+                                        @endif
+                                        @if($course->deleted_at)
+                                            <li>
+                                                <a class="button" href="#" 
+                                                onclick="event.preventDefault();
+                                                        document.getElementById('course-publish-form-{{ $course->id }}').submit();">Publish</a>
+                                                <form id="course-publish-form-{{ $course->id }}" action="{{ route('courses.delete', $course->id) }}" method="POST" style="display: none;">
+                                                    {{ csrf_field() }}
+                                                    {{ method_field('DELETE') }}
+                                                </form>
+                                            </li>
+                                        @endif
                                     </ul>
                                   </td>
                                 </tr>

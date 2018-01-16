@@ -28,3 +28,4 @@ Route::get('/courses', 'CourseController@index')->name('courses.index')->middlew
 Route::get('/courses/{course}/edit', 'CourseController@edit')->name('courses.edit')->middleware('auth');
 Route::put('/courses/{course}', 'CourseController@update')->name('courses.update')->middleware('auth');
 Route::delete('/courses/{course}', 'CourseController@destroy')->name('courses.delete')->middleware('auth');
+Route::patch('/courses/{course_id}/restore', 'CourseController@restore')->name('courses.restore')->middleware('auth');

@@ -28,8 +28,10 @@
                                   <td>{{ ($course->deleted_at) ? 'In-Active' : 'Active'  }}</td>
                                   <td>
                                       <ul class="menu-list">
-                                        <li><a class="button" href="{{ route('courses.edit', $course->id) }}">Edit</a></li>
-                                        @if(!$course->deleted_at)
+                                        @if(!$course->deleted_at)  
+                                            <li>
+                                                <a class="button" href="{{ route('courses.edit', $course->id) }}">Edit</a>
+                                            </li>
                                             <li>
                                                 <a class="button" href="#" 
                                                 onclick="event.preventDefault();
@@ -45,9 +47,9 @@
                                                 <a class="button" href="#" 
                                                 onclick="event.preventDefault();
                                                         document.getElementById('course-publish-form-{{ $course->id }}').submit();">Publish</a>
-                                                <form id="course-publish-form-{{ $course->id }}" action="{{ route('courses.delete', $course->id) }}" method="POST" style="display: none;">
+                                                <form id="course-publish-form-{{ $course->id }}" action="{{ route('courses.restore', $course->id) }}" method="POST" style="display: none;">
                                                     {{ csrf_field() }}
-                                                    {{ method_field('DELETE') }}
+                                                    {{ method_field('PATCH') }}
                                                 </form>
                                             </li>
                                         @endif

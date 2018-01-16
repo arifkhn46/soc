@@ -87,7 +87,7 @@ class CourseController extends Controller
         $validations = [
             'title' => 'required|min:4',
             'description' => 'nullable',
-            'course_type_id' => 'exists:course_types,id'
+            'course_type_id' => 'exists:course_types,id',
         ];
 
         if ($request->get('title') != $course->title) {
@@ -119,5 +119,21 @@ class CourseController extends Controller
             ->back()
             ->with('flash', "Course {$course->title} has been deleted!")
             ->with('flash-class', 'is-danger');
+    }
+
+    /**
+     * Restore the specified resource to storage.
+     *
+     * @param  int  $course_id
+     * @return \Illuminate\Http\Response
+     */
+    public function restore($course_id)
+    {
+        $course = Course::withTrashed()->findOrFail($course_id);
+        $course->restore();
+        return redirect()
+            ->back()
+            ->with('flash', "Course {$course->title} has been restored!")
+            ->with('flash-class', 'is-primary');
     }
 }

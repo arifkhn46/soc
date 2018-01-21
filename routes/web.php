@@ -29,3 +29,11 @@ Route::get('/courses/{course}/edit', 'CourseController@edit')->name('courses.edi
 Route::put('/courses/{course}', 'CourseController@update')->name('courses.update')->middleware('auth');
 Route::delete('/courses/{course}', 'CourseController@destroy')->name('courses.delete')->middleware('auth');
 Route::patch('/courses/{course_id}/restore', 'CourseController@restore')->name('courses.restore')->middleware('auth');
+
+// Subject routes
+Route::post('/subjects/store', 'SubjectController@store')->name('subjects.store')->middleware('auth');
+Route::get('/subjects/create', 'SubjectController@create')->name('subjects.create')->middleware('auth');
+Route::get('/subjects', 'SubjectController@index')->name('subjects.list')->middleware('auth');
+
+// Content Repository.
+Route::post('/content_respositories/store', 'ContentRepositoryController@store')->name('content_respository.store')->middleware('auth');

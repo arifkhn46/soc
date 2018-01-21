@@ -34,4 +34,12 @@ class User extends Authenticatable
      * @var array
      */
     protected $dates = ['deleted_at'];
+
+    /**
+     * Get the content repositories of the user.
+     */
+    public function contentRepositories()
+    {
+        return $this->hasMany('App\ContentRepository');
+    }
 }

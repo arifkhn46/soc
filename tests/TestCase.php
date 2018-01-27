@@ -35,6 +35,14 @@ abstract class TestCase extends BaseTestCase
         return $admin;
     }
 
+
+    protected function signInAsTeacher()
+    {
+        $teacher = create('App\User', ['email' => 'jyoti.raman2013@gmail.com']);
+        $this->actingAs($teacher);
+        return $teacher;
+    }
+
     protected function disableExceptionHandling()
     {
         $this->oldExceptionHandler = $this->app->make(ExceptionHandler::class);

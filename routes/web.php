@@ -41,3 +41,17 @@ Route::group([
   Route::get('/subjects/create', 'SubjectController@create')->name('admin.subjects.create');
   Route::get('/subjects', 'SubjectController@index')->name('admin.subjects.list');
 });
+
+
+Route::group([
+  'prefix' => 'teacher',
+  'middleware' => 'teacher',
+  'namespace' => 'Teacher'
+], function () {
+  // Route::get('/', 'DashboardController@index')->name('admin.dashboard.index');
+  
+// Content Repository.
+  Route::post('/content_repositories/store', 'ContentRepositoryController@store')->name('teacher.content_repository.store')->middleware('teacher');
+  Route::get('/content_repositories/create', 'ContentRepositoryController@create')->name('teacher.content_repository.create')->middleware('teacher');
+  Route::get('/content_repositories', 'ContentRepositoryController@index')->name('teacher.content_repository.list')->middleware('teacher');
+});

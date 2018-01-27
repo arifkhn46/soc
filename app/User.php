@@ -62,4 +62,24 @@ class User extends Authenticatable
     {
         return $this->isAdmin();
     }
+
+    /**
+     * Determine if the user is an administrator.
+     *
+     * @return bool
+     */
+    public function isTeacher()
+    {
+        return in_array($this->email, config('soc.teachers'));
+    }
+
+    /**
+     * Determine if the user is an administrator.
+     *
+     * @return bool
+     */
+    public function getIsAdminTeacher()
+    {
+        return $this->isTeacher();
+    }
 }

@@ -7,5 +7,6 @@ return [
   ],
   'teachers' => [
     // Add the email addresses of users who should be teacher here.
+    'jyoti.raman2013@gmail.com'
   ],
 ];

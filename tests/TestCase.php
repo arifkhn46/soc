@@ -30,9 +30,7 @@ abstract class TestCase extends BaseTestCase
 
     protected function signInAsAdmin()
     {
-        $role = create('App\Role', ['name' => 'admin']); 
-        $admin = create('App\User');
-        $admin->attachRole($role->id);
+        $admin = create('App\User', ['email' => 'arifkhn46@gmail.com']);
         $this->actingAs($admin);
         return $admin;
     }

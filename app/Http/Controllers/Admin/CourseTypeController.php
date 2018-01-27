@@ -1,9 +1,10 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Admin;
 
 use App\CourseType;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
 
 class CourseTypeController extends Controller
 {
@@ -24,7 +25,7 @@ class CourseTypeController extends Controller
      */
     public function create()
     {
-        return view('course_type.create');
+        return view('admin.course_type.create');
     }
 
     /**
@@ -42,7 +43,12 @@ class CourseTypeController extends Controller
 
         $course_type['user_id'] = auth()->id();
 
-        CourseType::create($course_type);
+        $course_type = CourseType::create($course_type);
+
+        return redirect()
+            ->back()
+            ->with('flash', "Course Type <i>{$course_type->title}</i> created.")
+            ->with('flash-class', 'is-primary');
 
     }
 

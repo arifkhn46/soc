@@ -7,7 +7,7 @@
             <div class="column is-8">
                 <h4 class="title is-4 has-text-grey">Create a new subject</h4>
                 <div class="box">
-                  <form method="POST" action="{{ route('subjects.store') }}" id="create-subject-form">
+                  <form method="POST" action="{{ route('admin.subjects.store') }}" id="create-subject-form">
                     {{ csrf_field() }}
                     <div class="field">
                         <div class="control">

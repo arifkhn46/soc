@@ -1,9 +1,10 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Admin;
 
 use App\Subject;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
 
 class SubjectController extends Controller
 {
@@ -16,7 +17,7 @@ class SubjectController extends Controller
     {
         $subjects = Subject::withTrashed()->paginate(20);
         $serialNumber = $subjects->perPage() * ($subjects->currentPage() - 1);
-        return view('subject.index', ['subjects' => $subjects, 'serialNumber' => $serialNumber]);
+        return view('admin.subject.index', ['subjects' => $subjects, 'serialNumber' => $serialNumber]);
     }
 
     /**
@@ -26,7 +27,7 @@ class SubjectController extends Controller
      */
     public function create()
     {
-        return view('subject.create');
+        return view('admin.subject.create');
     }
 
     /**

@@ -44,7 +44,7 @@ class ComposeCourseTest extends TestCase
         $title = "Course 1";
         $title2 = "Course 2";
         $this->publishCourse(['title' => $title]);
-        $response = $this->get(route('courses.index'));
+        $response = $this->get(route('admin.courses.index'));
         $response->assertSee($title);
     }
 
@@ -54,7 +54,7 @@ class ComposeCourseTest extends TestCase
         $title = "Course 1";
         $updatedTitle = "Course 2";
         $this->publishCourse([ 'id' => 1, 'title' => $title]);
-        $response = $this->put(route('courses.update', 1), ['title' => $updatedTitle, 'description' => 'Course 2 description']);
+        $response = $this->put(route('admin.courses.update', 1), ['title' => $updatedTitle, 'description' => 'Course 2 description']);
         $response->assertSessionHas('flash');
         $this->assertDatabaseHas('courses', ['title' => $updatedTitle]);        
     }
@@ -65,7 +65,7 @@ class ComposeCourseTest extends TestCase
         $title = "Course 1";
         $this->publishCourse(['id' => 1, 'title' => $title]);
         $this->assertDatabaseHas('courses', ['title' => $title]);
-        $response = $this->delete(route('courses.delete', 1));
+        $response = $this->delete(route('admin.courses.delete', 1));
         $response->assertSessionHas('flash');
     }
 
@@ -74,10 +74,10 @@ class ComposeCourseTest extends TestCase
      */
     public function publishCourse($overrides = [])
     {
-        $this->withExceptionHandling()->signIn();
+        $this->withExceptionHandling()->signInAsAdmin();
         $courseType = create('App\CourseType', ['user_id' => auth()->id()]);
         $course = make('App\Course', $overrides + ['course_type_id' => $courseType->id]);
-        $response = $this->post(route('courses.store'), $course->toArray());
+        $response = $this->post(route('admin.courses.store'), $course->toArray());
         return $response;
     }
 }

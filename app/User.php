@@ -42,4 +42,24 @@ class User extends Authenticatable
     {
         return $this->hasMany('App\ContentRepository');
     }
+
+    /**
+     * Determine if the user is an administrator.
+     *
+     * @return bool
+     */
+    public function isAdmin()
+    {
+        return in_array($this->email, config('soc.administrators'));
+    }
+
+    /**
+     * Determine if the user is an administrator.
+     *
+     * @return bool
+     */
+    public function getIsAdminAttribute()
+    {
+        return $this->isAdmin();
+    }
 }

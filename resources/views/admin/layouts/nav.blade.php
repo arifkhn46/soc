@@ -24,6 +24,25 @@
                         <div class="navbar-dropdown">
                         </div>
                     </div>
+                    <div class="navbar-item has-dropdown is-hoverable">
+                        <a class="navbar-link">
+                            Courses
+                        </a>
+                        <div class="navbar-dropdown">
+                            <a class="navbar-item" href="{{ route('course.types.create') }}">Crete course type</a>
+                            <a class="navbar-item" href="{{ route('courses.create') }}">Create a course</a>
+                            <a class="navbar-item" href="{{ route('courses.index') }}">Course list</a>
+                        </div>
+                    </div>
+                    <div class="navbar-item has-dropdown is-hoverable">
+                        <a class="navbar-link">
+                            Subjects
+                        </a>
+                        <div class="navbar-dropdown">
+                            <a class="navbar-item" href="{{ route('subjects.create') }}">Create a subject</a>
+                            <a class="navbar-item" href="{{ route('subjects.list') }}">Subject list</a>
+                        </div>
+                    </div>
                 @endguest
             </div>
             <div class="navbar-end">

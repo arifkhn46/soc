@@ -21,9 +21,9 @@ class CreateSubjectTest extends TestCase
      */
     private function createSubject($overrides = [])
     {
-        $this->withExceptionHandling()->signIn();
+        $this->withExceptionHandling()->signInAsAdmin();
         $subject = make('App\Subject', $overrides);
-        $response = $this->post(route('subjects.store'), $subject->toArray());
+        $response = $this->post(route('admin.subjects.store'), $subject->toArray());
         return $response;
     }
 }

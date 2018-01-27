@@ -7,7 +7,7 @@
             <div class="column is-8">
                 <h4 class="title is-4 has-text-grey">Edit <i>{{ $course->title }}</i></h4>
                 <div class="box">
-                  <form method="POST" action="{{ route('courses.update', $course->id) }}" id="edit-course-form">
+                  <form method="POST" action="{{ route('admin.courses.update', $course->id) }}" id="edit-course-form">
                     {{ csrf_field() }}
                     {{ method_field('PUT') }}
                     <div class="field">

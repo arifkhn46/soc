@@ -1,10 +1,11 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Admin;
 
 use App\Course;
 use App\CourseType;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
 
 class CourseController extends Controller
 {
@@ -17,7 +18,7 @@ class CourseController extends Controller
     {
         $courses = Course::withTrashed()->paginate(20);
         $serialNumber = $courses->perPage() * ($courses->currentPage()-1);
-        return view('course.index', ['courses' => $courses, 'serialNumber' => $serialNumber]);
+        return view('admin.course.index', ['courses' => $courses, 'serialNumber' => $serialNumber]);
     }
 
     /**
@@ -28,7 +29,7 @@ class CourseController extends Controller
     public function create()
     {
         $courseTypes = CourseType::latest()->get();
-        return view('course.create', ['courseTypes' => $courseTypes]);
+        return view('admin.course.create', ['courseTypes' => $courseTypes]);
     }
 
     /**
@@ -72,7 +73,7 @@ class CourseController extends Controller
     public function edit(Course $course)
     {
         $courseTypes = CourseType::latest()->get();
-        return view('course.edit', ['course' => $course, 'courseTypes' => $courseTypes]);
+        return view('admin.course.edit', ['course' => $course, 'courseTypes' => $courseTypes]);
     }
 
     /**

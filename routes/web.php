@@ -17,23 +17,27 @@ Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 
-// Course type routes
-Route::get('/course_type/create', 'CourseTypeController@create')->name('course.types.create')->middleware('auth');
-Route::post('/course_type/store', 'CourseTypeController@store')->name('course.types.store')->middleware('auth');
+Route::group([
+  'prefix' => 'admin',
+  'middleware' => 'admin',
+  'namespace' => 'Admin'
+], function () {
+  // Route::get('/', 'DashboardController@index')->name('admin.dashboard.index');
+  // Course type routes
+  Route::get('/course_type/create', 'CourseTypeController@create')->name('admin.course_types.create');
+  Route::post('/course_types/store', 'CourseTypeController@store')->name('admin.course_types.store');
 
-// Courses Route
-Route::get('/courses/create', 'CourseController@create')->name('courses.create')->middleware('auth');
-Route::post('/courses/store', 'CourseController@store')->name('courses.store')->middleware('auth');
-Route::get('/courses', 'CourseController@index')->name('courses.index')->middleware('auth');
-Route::get('/courses/{course}/edit', 'CourseController@edit')->name('courses.edit')->middleware('auth');
-Route::put('/courses/{course}', 'CourseController@update')->name('courses.update')->middleware('auth');
-Route::delete('/courses/{course}', 'CourseController@destroy')->name('courses.delete')->middleware('auth');
-Route::patch('/courses/{course_id}/restore', 'CourseController@restore')->name('courses.restore')->middleware('auth');
+  // Courses Route
+  Route::get('/courses/create', 'CourseController@create')->name('admin.courses.create');
+  Route::post('/courses/store', 'CourseController@store')->name('admin.courses.store');
+  Route::get('/courses', 'CourseController@index')->name('admin.courses.index');
+  Route::get('/courses/{course}/edit', 'CourseController@edit')->name('admin.courses.edit');
+  Route::put('/courses/{course}', 'CourseController@update')->name('admin.courses.update');
+  Route::delete('/courses/{course}', 'CourseController@destroy')->name('admin.courses.delete');
+  Route::patch('/courses/{course_id}/restore', 'CourseController@restore')->name('admin.courses.restore');
 
-// Subject routes
-Route::post('/subjects/store', 'SubjectController@store')->name('subjects.store')->middleware('auth');
-Route::get('/subjects/create', 'SubjectController@create')->name('subjects.create')->middleware('auth');
-Route::get('/subjects', 'SubjectController@index')->name('subjects.list')->middleware('auth');
-
-// Content Repository.
-Route::post('/content_respositories/store', 'ContentRepositoryController@store')->name('content_respository.store')->middleware('auth');
+  // Subject routes
+  Route::post('/subjects/store', 'SubjectController@store')->name('admin.subjects.store');
+  Route::get('/subjects/create', 'SubjectController@create')->name('admin.subjects.create');
+  Route::get('/subjects', 'SubjectController@index')->name('admin.subjects.list');
+});

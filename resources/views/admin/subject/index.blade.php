@@ -5,7 +5,7 @@
     <div>
         <div class="container">
             <div class="column">
-                <h4 class="title is-4 has-text-grey">Courses List</h4>
+                <h4 class="title is-4 has-text-grey">Subject List</h4>
                 <div class="box">
                     <table class="table is-bordered is-striped is-hoverable is-fullwidth">
                         <thead>
@@ -15,52 +15,53 @@
                               <th>Created At</th>
                               <th>Updated At</th>
                               <th>Status</th>
-                              <th>Operations</th>
+                              <!-- <th>Operations</th> -->
                             </tr>
                         </thead>
                         <tfoot>
-                            @foreach($courses as $key => $course)
+                            @foreach($subjects as $key => $subject)
+                            
                                 <tr>
                                   <td>{{ $serialNumber + ($key+1) }}</td>
-                                  <td>{{ $course->title }}</td>
-                                  <td>{{ $course->created_at }}</td>
-                                  <td>{{ $course->updated_at }}</td>
-                                  <td>{{ ($course->deleted_at) ? 'In-Active' : 'Active'  }}</td>
-                                  <td>
+                                  <td>{{ $subject->title }}</td>
+                                  <td>{{ $subject->created_at }}</td>
+                                  <td>{{ $subject->updated_at }}</td>
+                                  <td>{{ ($subject->deleted_at) ? 'In-Active' : 'Active'  }}</td>
+                                  <!-- <td>
                                       <ul class="menu-list">
-                                        @if(!$course->deleted_at)  
+                                        @if(!$subject->deleted_at)  
                                             <li>
-                                                <a class="button" href="{{ route('courses.edit', $course->id) }}">Edit</a>
+                                                <a class="button" href="">Edit</a>
                                             </li>
                                             <li>
                                                 <a class="button" href="#" 
                                                 onclick="event.preventDefault();
-                                                        document.getElementById('course-unpublish-form-{{ $course->id }}').submit();">Unpublish</a>
-                                                <form id="course-unpublish-form-{{ $course->id }}" action="{{ route('courses.delete', $course->id) }}" method="POST" style="display: none;">
+                                                        document.getElementById('course-unpublish-form-{{ $subject->id }}').submit();">Unpublish</a>
+                                                <form id="course-unpublish-form-{{ $subject->id }}" action="" method="POST" style="display: none;">
                                                     {{ csrf_field() }}
                                                     {{ method_field('DELETE') }}
                                                 </form>
                                             </li>
                                         @endif
-                                        @if($course->deleted_at)
+                                        @if($subject->deleted_at)
                                             <li>
                                                 <a class="button" href="#" 
                                                 onclick="event.preventDefault();
-                                                        document.getElementById('course-publish-form-{{ $course->id }}').submit();">Publish</a>
-                                                <form id="course-publish-form-{{ $course->id }}" action="{{ route('courses.restore', $course->id) }}" method="POST" style="display: none;">
+                                                        document.getElementById('subject-publish-form-{{ $subject->id }}').submit();">Publish</a>
+                                                <form id="course-publish-form-{{ $subject->id }}" action="{{ route('courses.restore', $subject->id) }}" method="POST" style="display: none;">
                                                     {{ csrf_field() }}
                                                     {{ method_field('PATCH') }}
                                                 </form>
                                             </li>
                                         @endif
                                     </ul>
-                                  </td>
+                                  </td> -->
                                 </tr>
                             @endforeach
-                            @if($courses->links() instanceof \Illuminate\Pagination\LengthAwarePaginator)
+                            @if($subjects->links() instanceof \Illuminate\Pagination\LengthAwarePaginator)
                                 <tr>
                                     <td colspan="6">
-                                        {{ $courses->links() }}
+                                        {{ $subjects->links() }}
                                     </td>
                                 </tr>
                             @endif

@@ -36,9 +36,12 @@ abstract class TestCase extends BaseTestCase
     }
 
 
-    protected function signInAsTeacher()
+    protected function signInAsTeacher($overrides = [])
     {
-        $teacher = create('App\User', ['email' => 'jyoti.raman2013@gmail.com']);
+        if(empty($overrides['email'])) {
+            $overrides['email'] = 'jyoti.raman2013@gmail.com';
+        }
+        $teacher = create('App\User', $overrides);
         $this->actingAs($teacher);
         return $teacher;
     }

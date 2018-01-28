@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('teacher.layouts.app')
 
 @section('content')
   <section class="hero soc-app-form">
@@ -26,6 +26,28 @@
                                   <td>{{ $repository->created_at }}</td>
                                   <td>{{ $repository->updated_at }}</td>
                                   <td>{{ ($repository->deleted_at) ? 'In-Active' : 'Active'  }}</td>
+                                  <td>
+                                      <div class="dropdown soc-dropdown">
+                                        <div class="dropdown-trigger">
+                                            <button class="button" aria-haspopup="true" aria-controls="dropdown-menu">
+                                                <span>Add Content</span>
+                                            </button>
+                                        </div>
+                                        <div class="dropdown-menu" id="dropdown-menu" role="menu">
+                                            <div class="dropdown-content">
+                                                <a href="#" class="dropdown-item">
+                                                    Subject
+                                                </a>
+                                                <a href="#" class="dropdown-item">
+                                                    Topic
+                                                </a>
+                                                <a href="#" class="dropdown-item">
+                                                    Sub-Topic
+                                                </a>
+                                            </div>
+                                        </div>
+                                        </div>
+                                  </td>
                                 </tr>
                             @endforeach
                             @if($repositories->links() instanceof \Illuminate\Pagination\LengthAwarePaginator)
@@ -42,4 +64,20 @@
         </div>
     </div>
   </section>
+@endsection
+
+@section('scripts')
+    <script>
+        (function($){
+            $(document).ready(function(){
+                $('.soc-dropdown').click(function(event){
+                    event.stopPropagation();
+                    $(this).toggleClass('is-active');
+                });
+                $('body').click(function(e){
+                    $('.soc-dropdown').removeClass('is-active');                        
+                });
+            });
+        })(jQuery);    
+    </script>
 @endsection

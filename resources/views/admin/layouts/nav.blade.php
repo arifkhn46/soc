@@ -29,18 +29,18 @@
                             Courses
                         </a>
                         <div class="navbar-dropdown">
-                            <a class="navbar-item" href="{{ route('course.types.create') }}">Crete course type</a>
-                            <a class="navbar-item" href="{{ route('courses.create') }}">Create a course</a>
-                            <a class="navbar-item" href="{{ route('courses.index') }}">Course list</a>
+                            <a class="navbar-item" href="{{ route('admin.course_types.create') }}">Crete course type</a>
+                            <a class="navbar-item" href="{{ route('admin.courses.create') }}">Create a course</a>
+                            <a class="navbar-item" href="{{ route('admin.courses.index') }}">Course list</a>
                         </div>
                     </div>
                     <div class="navbar-item has-dropdown is-hoverable">
                         <a class="navbar-link">
-                            Subjects
+                            Subjects category
                         </a>
                         <div class="navbar-dropdown">
-                            <a class="navbar-item" href="{{ route('subjects.create') }}">Create a subject</a>
-                            <a class="navbar-item" href="{{ route('subjects.list') }}">Subject list</a>
+                            <a class="navbar-item" href="{{ route('admin.subject_categories.create') }}">Create</a>
+                            <a class="navbar-item" href="{{ route('admin.subject_categories.list') }}">List</a>
                         </div>
                     </div>
                 @endguest

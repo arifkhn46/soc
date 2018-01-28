@@ -19,9 +19,11 @@
                 @else
                     <div class="navbar-item has-dropdown is-hoverable">
                         <a class="navbar-link">
-                            Dashboard
+                                Content Repository
                         </a>
                         <div class="navbar-dropdown">
+                            <a class="navbar-item" href="{{ route('teacher.content_repository.create') }}">Create</a>
+                            <a class="navbar-item" href="{{ route('teacher.content_repository.list') }}">List</a>
                         </div>
                     </div>
                 @endguest

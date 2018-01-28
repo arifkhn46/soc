@@ -37,21 +37,20 @@ Route::group([
   Route::patch('/courses/{course_id}/restore', 'CourseController@restore')->name('admin.courses.restore');
 
   // Subject routes
-  Route::post('/subjects/store', 'SubjectController@store')->name('admin.subjects.store');
-  Route::get('/subjects/create', 'SubjectController@create')->name('admin.subjects.create');
-  Route::get('/subjects', 'SubjectController@index')->name('admin.subjects.list');
+  Route::post('/subject-categories/store', 'SubjectCategoriesController@store')->name('admin.subject_categories.store');
+  Route::get('/subject-categories/create', 'SubjectCategoriesController@create')->name('admin.subject_categories.create');
+  Route::get('/subject-categories', 'SubjectCategoriesController@index')->name('admin.subject_categories.list');
 });
 
 
 Route::group([
   'prefix' => 'teacher',
   'middleware' => 'teacher',
-  'namespace' => 'Teacher'
-], function () {
+  'namespace' => 'Teacher'], function () {
   // Route::get('/', 'DashboardController@index')->name('admin.dashboard.index');
-  
-// Content Repository.
-  Route::post('/content_repositories/store', 'ContentRepositoryController@store')->name('teacher.content_repository.store')->middleware('teacher');
-  Route::get('/content_repositories/create', 'ContentRepositoryController@create')->name('teacher.content_repository.create')->middleware('teacher');
-  Route::get('/content_repositories', 'ContentRepositoryController@index')->name('teacher.content_repository.list')->middleware('teacher');
+  // Content Repository.
+  Route::post('/content-repositories/store', 'ContentRepositoryController@store')->name('teacher.content_repository.store')->middleware('teacher');
+  Route::get('/content-repositories/create', 'ContentRepositoryController@create')->name('teacher.content_repository.create')->middleware('teacher');
+  Route::get('/content-repositories', 'ContentRepositoryController@index')->name('teacher.content_repository.list')->middleware('teacher');
+  Route::post('/content-repositories/store/subject', 'ContentRepositoryController@addSubject')->name('teacher.content_repository.add_subject');
 });

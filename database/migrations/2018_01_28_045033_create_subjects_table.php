@@ -15,14 +15,14 @@ class CreateSubjectsTable extends Migration
     {
         Schema::create('subjects', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('title')->unique();
-            $table->text('description')->nullable();
-            $table->integer('user_id')->unsigned();
+            $table->string('title');
+            $table->string('description');
+            $table->integer('category_id')->unsinged();
             $table->timestamps();
             $table->softDeletes();
 
-            $table->foreign('user_id')
-                ->references('id')->on('users');
+            $table->foreign('category_id')
+                ->references('id')->on('subjects');
         });
     }
 

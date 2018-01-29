@@ -19,6 +19,7 @@ class CreateTopicsTable extends Migration
             $table->longText('body');
             $table->integer('subject_id')->unsigned();
             $table->integer('user_id')->unsigned();
+            $table->integer('parent_id')->nullable();
             $table->timestamps();
             
             $table->foreign('subject_id')

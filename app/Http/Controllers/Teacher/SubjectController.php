@@ -25,6 +25,7 @@ class SubjectController extends Controller
             'title' => $data['title'],
             'description' => $data['description'],
             'category_id' => $data['category_id'],
+            'user_id' => auth()->id(),
         ]);
         $subject->contentRepositories()->attach($data['content_repository_id']);
         return redirect()

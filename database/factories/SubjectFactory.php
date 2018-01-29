@@ -8,6 +8,9 @@ $factory->define(App\Subject::class, function (Faker $faker) {
         'description' => $faker->text(200),
         'category_id' => function () {
             return factory('App\SubjectCategory')->create()->id;
+        },
+        'user_id' => function () {
+            return factory('App\User')->create()->id;
         }
     ];
 });

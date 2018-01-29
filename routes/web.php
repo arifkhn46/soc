@@ -53,4 +53,7 @@ Route::group([
   Route::get('/content-repositories/create', 'ContentRepositoryController@create')->name('teacher.content_repository.create')->middleware('teacher');
   Route::get('/content-repositories', 'ContentRepositoryController@index')->name('teacher.content_repository.list')->middleware('teacher');
   Route::post('/subject/store', 'SubjectController@store')->name('teacher.subject.store');
+
+  //Topic
+  Route::post('/topics/store', 'TopicsController@store')->name('teacher.topics.store');
 });

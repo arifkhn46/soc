@@ -18,11 +18,14 @@ class CreateSubjectsTable extends Migration
             $table->string('title');
             $table->string('description');
             $table->integer('category_id')->unsigned();
+            $table->integer('user_id')->unsigned();
             $table->timestamps();
             $table->softDeletes();
 
             $table->foreign('category_id')
                 ->references('id')->on('subject_categories');
+            $table->foreign('user_id')
+                ->references('id')->on('users');
         });
     }
 

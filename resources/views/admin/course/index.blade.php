@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('admin.layouts.app')
 
 @section('content')
   <section class="hero soc-app-form">
@@ -28,12 +28,12 @@
                                   <td>{{ ($course->deleted_at) ? 'In-Active' : 'Active'  }}</td>
                                   <td>
                                       <ul class="menu-list">
-                                        @if(!$course->deleted_at)  
+                                        @if(!$course->deleted_at)
                                             <li>
                                                 <a class="button" href="{{ route('admin.courses.edit', $course->id) }}">Edit</a>
                                             </li>
                                             <li>
-                                                <a class="button" href="#" 
+                                                <a class="button" href="#"
                                                 onclick="event.preventDefault();
                                                         document.getElementById('course-unpublish-form-{{ $course->id }}').submit();">Unpublish</a>
                                                 <form id="course-unpublish-form-{{ $course->id }}" action="{{ route('admin.courses.delete', $course->id) }}" method="POST" style="display: none;">
@@ -44,7 +44,7 @@
                                         @endif
                                         @if($course->deleted_at)
                                             <li>
-                                                <a class="button" href="#" 
+                                                <a class="button" href="#"
                                                 onclick="event.preventDefault();
                                                         document.getElementById('course-publish-form-{{ $course->id }}').submit();">Publish</a>
                                                 <form id="course-publish-form-{{ $course->id }}" action="{{ route('admin.courses.restore', $course->id) }}" method="POST" style="display: none;">
@@ -65,7 +65,7 @@
                                 </tr>
                             @endif
                         </tfoot>
-                    </table>  
+                    </table>
                 </div>
             </div>
         </div>

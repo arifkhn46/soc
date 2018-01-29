@@ -20,7 +20,7 @@
                         </thead>
                         <tfoot>
                             @foreach($subjectCategories as $key => $category)
-                            
+
                                 <tr>
                                   <td>{{ $serialNumber + ($key+1) }}</td>
                                   <td>{{ $category->title }}</td>
@@ -29,12 +29,12 @@
                                   <td>{{ ($category->deleted_at) ? 'In-Active' : 'Active'  }}</td>
                                   <!-- <td>
                                       <ul class="menu-list">
-                                        @if(!$category->deleted_at)  
+                                        @if(!$category->deleted_at)
                                             <li>
                                                 <a class="button" href="">Edit</a>
                                             </li>
                                             <li>
-                                                <a class="button" href="#" 
+                                                <a class="button" href="#"
                                                 onclick="event.preventDefault();
                                                         document.getElementById('course-unpublish-form-{{ $category->id }}').submit();">Unpublish</a>
                                                 <form id="course-unpublish-form-{{ $category->id }}" action="" method="POST" style="display: none;">
@@ -45,7 +45,7 @@
                                         @endif
                                         @if($category->deleted_at)
                                             <li>
-                                                <a class="button" href="#" 
+                                                <a class="button" href="#"
                                                 onclick="event.preventDefault();
                                                         document.getElementById('subject-publish-form-{{ $category->id }}').submit();">Publish</a>
                                                 <form id="course-publish-form-{{ $category->id }}" action="{{ route('courses.restore', $category->id) }}" method="POST" style="display: none;">
@@ -66,7 +66,7 @@
                                 </tr>
                             @endif
                         </tfoot>
-                    </table>  
+                    </table>
                 </div>
             </div>
         </div>

@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('admin.layouts.app')
 
 @section('content')
   <section class="hero soc-app-form">
@@ -15,7 +15,7 @@
                             <input class="input {{ $errors->has('title') ? ' is-danger' : '' }}" type="text" value="{{ old('title', $course->title) }}" id="title" name="title" placeholder="Title" required autofocus>
                         </div>
                         @if ($errors->has('title'))
-                            <p class="help is-danger">{{ $errors->first('title') }}</p>                        
+                            <p class="help is-danger">{{ $errors->first('title') }}</p>
                         @endif
                     </div>
                     <div class="field">
@@ -23,7 +23,7 @@
                             <textarea class="textarea {{ $errors->has('description') ? ' is-danger' : '' }}" placeholder="Description" id="description" name="description">{{ old('description', $course->description) }}</textarea>
                         </div>
                         @if ($errors->has('description'))
-                            <p class="help is-danger">{{ $errors->first('description') }}</p>                        
+                            <p class="help is-danger">{{ $errors->first('description') }}</p>
                         @endif
                     </div>
                     <div class="field">
@@ -38,7 +38,7 @@
                             </div>
                         </div>
                         @if ($errors->has('course_type_id'))
-                            <p class="help is-danger">{{ $errors->first('course_type_id') }}</p>                        
+                            <p class="help is-danger">{{ $errors->first('course_type_id') }}</p>
                         @endif
                     </div>
                     <button type="submit" class="button is-info is-fullwidth">Update</button>

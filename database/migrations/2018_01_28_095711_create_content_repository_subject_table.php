@@ -20,7 +20,7 @@ class CreateContentRepositorySubjectTable extends Migration
             $table->foreign('content_repository_id')
                 ->references('id')->on('content_repositories');
             $table->foreign('subject_id')
-                ->references('id')->on('teacher_subjects');
+                ->references('id')->on('subjects');
         });
     }
 

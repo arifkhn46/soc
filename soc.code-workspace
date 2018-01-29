@@ -1,0 +1,13 @@
+{
+	"folders": [
+		{
+			"path": "."
+		}
+	],
+	"settings": {
+				"files.associations": {},
+				"phpcs.enable": false,
+				"php.suggest.basic": true,
+				"editor.tabSize": 2,
+	}
+}

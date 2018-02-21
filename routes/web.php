@@ -20,26 +20,30 @@ Route::get('/home', 'HomeController@index')->name('home');
 Route::group([
   'prefix' => 'admin',
   'middleware' => 'admin',
-  'namespace' => 'Admin'
+  'namespace' => 'Admin',
+  'as' => 'admin.'
 ], function () {
   // Route::get('/', 'DashboardController@index')->name('admin.dashboard.index');
   // Course type routes
-  Route::get('/course_type/create', 'CourseTypeController@create')->name('admin.course_types.create');
-  Route::post('/course_types/store', 'CourseTypeController@store')->name('admin.course_types.store');
+  Route::get('/course_type/create', 'CourseTypeController@create')->name('course_types.create');
+  Route::post('/course_types/store', 'CourseTypeController@store')->name('course_types.store');
 
   // Courses Route
-  Route::get('/courses/create', 'CourseController@create')->name('admin.courses.create');
-  Route::post('/courses/store', 'CourseController@store')->name('admin.courses.store');
-  Route::get('/courses', 'CourseController@index')->name('admin.courses.index');
-  Route::get('/courses/{course}/edit', 'CourseController@edit')->name('admin.courses.edit');
-  Route::put('/courses/{course}', 'CourseController@update')->name('admin.courses.update');
-  Route::delete('/courses/{course}', 'CourseController@destroy')->name('admin.courses.delete');
-  Route::patch('/courses/{course_id}/restore', 'CourseController@restore')->name('admin.courses.restore');
+  Route::get('/courses/create', 'CourseController@create')->name('courses.create');
+  Route::post('/courses/store', 'CourseController@store')->name('courses.store');
+  Route::get('/courses', 'CourseController@index')->name('courses.index');
+  Route::get('/courses/{course}/edit', 'CourseController@edit')->name('courses.edit');
+  Route::put('/courses/{course}', 'CourseController@update')->name('courses.update');
+  Route::delete('/courses/{course}', 'CourseController@destroy')->name('courses.delete');
+  Route::patch('/courses/{course_id}/restore', 'CourseController@restore')->name('courses.restore');
 
   // Subject routes
-  Route::post('/subject-categories/store', 'SubjectCategoriesController@store')->name('admin.subject_categories.store');
-  Route::get('/subject-categories/create', 'SubjectCategoriesController@create')->name('admin.subject_categories.create');
-  Route::get('/subject-categories', 'SubjectCategoriesController@index')->name('admin.subject_categories.list');
+  Route::post('/subject-categories/store', 'SubjectCategoriesController@store')->name('subject_categories.store');
+  Route::get('/subject-categories/create', 'SubjectCategoriesController@create')->name('subject_categories.create');
+  Route::get('/subject-categories', 'SubjectCategoriesController@index')->name('subject_categories.list');
+
+  // Question Type.
+  Route::post('/question-types/store', 'QuestionTypesController@store')->name('question_types.store');
 });
 
 

@@ -21,11 +21,11 @@ class CreateTopicsTable extends Migration
             $table->integer('user_id')->unsigned();
             $table->integer('parent_id')->nullable();
             $table->timestamps();
-            
+
             $table->foreign('subject_id')
-                ->on('id')->references('subjects');
+                ->references('id')->on('subjects');
             $table->foreign('user_id')
-                ->on('id')->references('users');
+                ->references('id')->on('users');
         });
     }
 

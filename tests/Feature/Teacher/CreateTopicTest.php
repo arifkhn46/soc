@@ -19,7 +19,7 @@ class CreateTopicTest extends TestCase
     }
 
     /** @test */
-    public function a_user_who_is_not_teacher_can_not_create_a_topic()
+    public function a_user_who_is_not_a_teacher_can_not_create_a_topic()
     {
         $this->withExceptionHandling()->signIn();
         $topic = make('App\Topic');

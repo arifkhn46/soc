@@ -10,7 +10,7 @@ class SubjectTest extends TestCase
     use RefreshDatabase;
 
     /** @test */
-    function a_subject_belongs_to_a_content_repository()
+    function it_should_belongs_to_a_content_repository()
     {
         $subject = create('App\Subject');
         $this->assertInstanceOf(

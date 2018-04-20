@@ -8,21 +8,21 @@
                 <h3 class="title has-text-grey">Login</h3>
                 <div class="box">
                     <form method="POST" id="login-form" action="{{ route('login') }}">
-                        {{ csrf_field() }}                
+                        {{ csrf_field() }}
                         <div class="field">
                             <div class="control has-icons-left has-icons-right">
                                 <input class="input {{ $errors->has('email') ? ' is-danger' : '' }}" type="email" placeholder="user@example.com" value="{{ old('email') }}" id="email" name="email">
                                 <span class="icon is-small is-left">
                                 <i class="fa fa-envelope"></i>
                                 </span>
-                                @if ($errors->has('email')) 
+                                @if ($errors->has('email'))
                                     <span class="icon is-small is-right">
                                         <i class="fa fa-warning"></i>
                                     </span>
                                 @endif
                             </div>
                             @if ($errors->has('email'))
-                                <p class="help is-danger">{{ $errors->first('email') }}</p>                        
+                                <p class="help is-danger">{{ $errors->first('email') }}</p>
                             @endif
                         </div>
                         <div class="field">
@@ -33,7 +33,7 @@
                                 </span>
                             </p>
                             @if ($errors->has('password'))
-                                <p class="help is-danger">{{ $errors->first('password') }}</p>                        
+                                <p class="help is-danger">{{ $errors->first('password') }}</p>
                             @endif
                         </div>
                         <div class="field">
@@ -44,7 +44,7 @@
                             </div>
                         </div>
                         <button type="submit" class="button is-info is-fullwidth">Login</button>
-                        <a class="button is-link" href="{{ route('password.request') }}">
+                        <a class="button is-link is-small" href="{{ route('password.request') }}">
                             Forgot Your Password?
                         </a>
                     </form>

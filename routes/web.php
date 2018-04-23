@@ -53,7 +53,7 @@ Route::group([
   'namespace' => 'Teacher'], function () {
   // Route::get('/', 'DashboardController@index')->name('admin.dashboard.index');
   // Content Repository.
-  Route::post('/content-repositories/store', 'ContentRepositoryController@store')->name('teacher.content_repository.store')->middleware('teacher');
-  Route::get('/content-repositories/create', 'ContentRepositoryController@create')->name('teacher.content_repository.create')->middleware('teacher');
-  Route::get('/content-repositories', 'ContentRepositoryController@index')->name('teacher.content_repository.list')->middleware('teacher');
+  Route::post('/content-repositories/store', 'ContentRepositoryController@store')->name('teacher.content_repository.store');
+  Route::get('/content-repositories/create', 'ContentRepositoryController@create')->name('teacher.content_repository.create');
+  Route::get('/content-repositories', 'ContentRepositoryController@index')->name('teacher.content_repository.list');
 });

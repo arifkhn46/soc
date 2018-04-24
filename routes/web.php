@@ -56,4 +56,7 @@ Route::group([
   Route::post('/content-repositories/store', 'ContentRepositoryController@store')->name('teacher.content_repository.store');
   Route::get('/content-repositories/create', 'ContentRepositoryController@create')->name('teacher.content_repository.create');
   Route::get('/content-repositories', 'ContentRepositoryController@index')->name('teacher.content_repository.list');
+
+  //Content routes.
+  Route::post('/content/store', 'ContentController@store')->name('teacher.content.store');
 });

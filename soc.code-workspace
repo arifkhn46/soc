@@ -6,7 +6,7 @@
 	],
 	"settings": {
 				"files.associations": {},
-				"phpcs.enable": false,
+				"gitlens.codeLens.enabled": false,
 				"php.suggest.basic": true,
 				"editor.tabSize": 2,
 	}

@@ -1,6 +1,6 @@
 <?php
 
-namespace Tests\Feature\Course;
+namespace Tests\Feature\Admin;
 
 use Tests\TestCase;
 use Illuminate\Foundation\Testing\RefreshDatabase;
@@ -31,7 +31,7 @@ class ComposeCourseTest extends TestCase
     }
 
     /** @test */
-    public function an_authenticated_user_can_create_a_course() 
+    public function an_authenticated_user_can_create_a_course()
     {
         $title = "Course";
         $response = $this->publishCourse(['title' => $title]);

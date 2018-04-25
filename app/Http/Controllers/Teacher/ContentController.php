@@ -19,7 +19,7 @@ class ContentController extends Controller
         $content = $request->validate([
             'title' => 'required',
             'description' => 'required',
-            'content_repo_id' => 'required',
+            'content_repository_id' => 'required|exists:content_repository,id',
         ]);
         $content = Content::create($content);
         return redirect()

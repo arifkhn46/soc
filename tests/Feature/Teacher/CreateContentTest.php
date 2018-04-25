@@ -16,7 +16,7 @@ class CreateContent extends TestCase
         $this->signInAsTeacher();
         $contentRespository = create('App\ContentRepository');
         $title = 'Maths';
-        $this->createContent(['title' => $title, 'content_repo_id' => $contentRespository->id]);
+        $this->createContent(['title' => $title, 'content_repository_id' => $contentRespository->id]);
         $this->assertDatabaseHas('contents', ['title' => $title]);
     }
 

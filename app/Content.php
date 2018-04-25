@@ -12,6 +12,6 @@ class Content extends Model
      * @var array
      */
     protected $fillable = [
-        'title', 'description', 'content_repo_id',
+        'title', 'description', 'content_repository_id',
     ];
 }

@@ -17,11 +17,11 @@ class CreateContentsTable extends Migration
             $table->increments('id');
             $table->string('title', 50)->unique();
             $table->longText('description');
-            $table->integer('content_repo_id')->unsigned();
+            $table->integer('content_repository_id')->unsigned();
             $table->timestamps();
             $table->softDeletes();
 
-            $table->foreign('content_repo_id')
+            $table->foreign('content_repository_id')
                 ->references('id')->on('content_repositories');
         });
     }

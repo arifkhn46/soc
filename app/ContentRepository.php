@@ -2,7 +2,7 @@
 
 namespace App;
 
-use App\Subject;
+use App\Content;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
@@ -22,16 +22,8 @@ class ContentRepository extends Model
     /**
      * A content Repository can have may subjects
      */
-    public function subjects()
+    public function contents()
     {
-        return $this->belongsToMany(Subject::class);
-    }
-
-    /**
-     * Add a new subject.
-     */
-    public function addSubject($subject)
-    {
-        $this->subjects()->save($subject);
+        return $this->hasMany(Content::class);
     }
 }

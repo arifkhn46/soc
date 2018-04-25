@@ -5,12 +5,12 @@ namespace Tests\Feature\Teacher;
 use Tests\TestCase;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 
-class ResourcesTest extends TestCase
+class AssetsTest extends TestCase
 {
     use RefreshDatabase;
 
     /** @test */
-    public function a_teacher_can_add_a_resource_to_its_content()
+    public function a_teacher_can_add_a_html_asset_to_his_content()
     {
         $this->signInAsTeacher();
     }

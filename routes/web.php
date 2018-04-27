@@ -59,4 +59,7 @@ Route::group([
 
   //Content routes.
   Route::post('/content/store', 'ContentController@store')->name('teacher.content.store');
+
+  // Asset routes.
+  Route::post('/assets/store', 'AssetsController@store')->name('teacher.assets.store');
 });

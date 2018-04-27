@@ -29,7 +29,9 @@ class AssetsTest extends TestCase
         $description = "<h1>Content Description</h1>";
         $file = UploadedFile::fake()->create('document.pdf');
         $this->addAsset(['type' => 'pdf', 'path' => $file]);
-        Storage::disk('public')->assertExists('assets/' . $file->hashName());
+        $file_path = 'assets/' . $file->hashName();
+        $this->assertDatabaseHas('assets', ['path' => $file_path]);
+        Storage::disk('public')->assertExists($file_path);
     }
 
     private function addAsset($overrides = []) {

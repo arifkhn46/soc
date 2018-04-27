@@ -17,7 +17,7 @@ class CreateContentsTable extends Migration
             $table->increments('id');
             $table->string('title', 50)->unique();
             $table->longText('description');
-            $table->integer('content_repository_id')->unsigned();
+            $table->unsignedInteger('content_repository_id');
             $table->timestamps();
             $table->softDeletes();
 

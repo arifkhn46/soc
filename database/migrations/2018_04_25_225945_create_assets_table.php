@@ -21,6 +21,7 @@ class CreateAssetsTable extends Migration
             $table->string('path')->nullable();
             $table->unsignedInteger('user_id');
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

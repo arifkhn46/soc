@@ -61,5 +61,5 @@ Route::group([
   Route::post('/content/store', 'ContentController@store')->name('teacher.content.store');
 
   // Asset routes.
-  Route::post('/assets/store', 'AssetsController@store')->name('teacher.assets.store');
+  Route::post('/assets/{content}/store', 'AssetsController@store')->name('teacher.assets.store');
 });

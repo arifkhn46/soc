@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Teacher;
 
 use App\Asset;
+use App\Content;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
@@ -11,10 +12,11 @@ class AssetsController extends Controller
     /**
      * Store a newly created asset.
      *
+     * @param \App\Content $content
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(Content $content, Request $request)
     {
         $asset = $request->validate([
             'title' => 'required',
@@ -27,7 +29,7 @@ class AssetsController extends Controller
             $asset['path'] = $path;
         }
         $asset['user_id'] = auth()->id();
-        $asset = Asset::create($asset);
+        $content->addAsset($asset);
         return redirect()
             ->back();
     }

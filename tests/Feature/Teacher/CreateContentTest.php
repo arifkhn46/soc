@@ -20,6 +20,7 @@ class CreateContent extends TestCase
         $this->assertDatabaseHas('contents', ['title' => $title]);
     }
 
+
     private function createContent($overrides = []) {
         $content = make('App\Content', $overrides);
         $response = $this->post(route('teacher.content.store'), $content->toArray());

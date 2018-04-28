@@ -14,7 +14,6 @@ class AssetsTest extends TestCase
     /** @test */
     public function a_teacher_can_add_a_html_asset_to_his_assets()
     {
-        $this->signInAsTeacher();
         $description = "<h1>Content Description</h1>";
         $title = "Asset1";
         $this->addAsset(['title' => $title, 'description' => $description, 'type' => 'html']);
@@ -25,7 +24,6 @@ class AssetsTest extends TestCase
     function a_teacher_can_upload_a_pdf_asset_to_his_assets()
     {
         Storage::fake('public');
-        $this->signInAsTeacher();
         $description = "<h1>Content Description</h1>";
         $file = UploadedFile::fake()->create('document.pdf');
         $this->addAsset(['type' => 'pdf', 'path' => $file]);
@@ -35,8 +33,10 @@ class AssetsTest extends TestCase
     }
 
     private function addAsset($overrides = []) {
+        $this->signInAsTeacher();
         $asset = make('App\Asset', $overrides);
-        $response = $this->post(route('teacher.assets.store'), $asset->toArray());
+        $content = create('App\Content');
+        $response = $this->post(route('teacher.assets.store', ['content' => $content->id] ), $asset->toArray());
         return $response;
     }
 }

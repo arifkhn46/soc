@@ -12,7 +12,7 @@ class ContentTest extends TestCase
 
     protected $content;
 
-    public function setUp()
+    public function setUp() : void
     {
         parent::setUp();
 

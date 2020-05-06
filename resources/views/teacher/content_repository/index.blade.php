@@ -1,10 +1,6 @@
 @extends('teacher.layouts.app')
 
 
-@section('header_content')
-    {{ Breadcrumbs::render('content-repository-list') }}
-@endsection
-
 @section('content')
   <section class="hero soc-app-form">
     <div>

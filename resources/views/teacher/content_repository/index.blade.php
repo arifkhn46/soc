@@ -1,5 +1,10 @@
 @extends('teacher.layouts.app')
 
+
+@section('header_content')
+    {{ Breadcrumbs::render('content-repository-list') }}
+@endsection
+
 @section('content')
   <section class="hero soc-app-form">
     <div>
@@ -58,7 +63,7 @@
                                 </tr>
                             @endif
                         </tfoot>
-                    </table>  
+                    </table>
                 </div>
             </div>
         </div>
@@ -75,9 +80,9 @@
                     $(this).toggleClass('is-active');
                 });
                 $('body').click(function(e){
-                    $('.soc-dropdown').removeClass('is-active');                        
+                    $('.soc-dropdown').removeClass('is-active');
                 });
             });
-        })(jQuery);    
+        })(jQuery);
     </script>
 @endsection

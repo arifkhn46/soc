@@ -1,5 +1,9 @@
 @extends('teacher.layouts.app')
 
+@section('header_content')
+    {{ Breadcrumbs::render('content-repositories') }}
+@endsection
+
 @section('content')
   <section class="hero soc-app-form">
     <div>
@@ -14,7 +18,7 @@
                             <input class="input {{ $errors->has('title') ? ' is-danger' : '' }}" type="text" value="{{ old('title') }}" id="title" name="title" placeholder="Title" required autofocus>
                         </div>
                         @if ($errors->has('title'))
-                            <p class="help is-danger">{{ $errors->first('title') }}</p>                        
+                            <p class="help is-danger">{{ $errors->first('title') }}</p>
                         @endif
                     </div>
                     <button type="submit" class="button is-info is-fullwidth">Create</button>

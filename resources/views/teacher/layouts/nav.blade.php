@@ -13,8 +13,8 @@
             </button>
         </div>
         <div id="soc-menu" class="navbar-menu">
-            <div class="navbar-start">
-                @guest 
+            <!-- <div class="navbar-start">
+                @guest
 
                 @else
                     <div class="navbar-item has-dropdown is-hoverable">
@@ -27,24 +27,29 @@
                         </div>
                     </div>
                 @endguest
-            </div>
+            </div> -->
             <div class="navbar-end">
                 @guest
                     <a class="navbar-item" href="{{ route('login') }}">Login</a>
                     <a class="navbar-item" href="{{ route('register') }}">Register</a>
                 @else
-                    <a class="navbar-item" href="#">
-                        Welcome, {{ Auth::user()->name }}
-                    </a>
-                    <a class="navbar-item" href="{{ route('logout') }}"
-                        onclick="event.preventDefault();
-                                document.getElementById('logout-form').submit();">
-                                            Logout
-                    </a>
+                    <div class="navbar-item has-dropdown is-hoverable">
+                        <a class="navbar-link">
+                            {{ Auth::user()->name }}
+                        </a>
+                        <div class="navbar-dropdown">
+                            <a class="navbar-item" href="{{ route('logout') }}"
+                                onclick="event.preventDefault();
+                                        document.getElementById('logout-form').submit();">
+                                                    Logout
+                            </a>
+                        </div>
+                    </div>
+
                     <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
                       {{ csrf_field() }}
                     </form>
-                @endguest                    
+                @endguest
             </div>
         </div>
     </div>

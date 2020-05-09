@@ -12,3 +12,4 @@ yarn-error.log
 .env
 storage/debugbar/
 *.DS_Store*
+/.vscode

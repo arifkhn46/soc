@@ -20,7 +20,7 @@ class UserAuthenticationTest extends TestCase
             'email'=> $user->email,
             'password' => 'secret'
         ])->assertStatus(200);
-            
-        // $this->assertArrayHasKey('access_token', $response->json());
+
+        $this->assertArrayHasKey('access_token', $response->json());
     }
 }

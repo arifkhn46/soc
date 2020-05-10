@@ -20,7 +20,10 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 Route::prefix('v1')->group(function(){
         Route::post('login', 'Api\Auth\LoginController@login')->name('api.user.login');
         // Route::post('register', 'Api\RegisterController@register')->name('api.user.register');
-        // Route::group(['middleware' => 'auth:api'], function(){
-        //     Route::post('getUser', 'Api\AuthController@profile');
-        // });
+        Route::group(['middleware' => 'auth:sanctum'], function(){
+            // Route::post('getUser', 'Api\AuthController@profile');
+            Route::get('/user', function (Request $request) {
+                    return $request->user();
+                })->name('api.user.profile');
+        });
 });

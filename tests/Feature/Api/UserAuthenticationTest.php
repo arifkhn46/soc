@@ -4,9 +4,9 @@ namespace Tests\Feature\Api;
 
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
-use Tests\TestCaseApi;
+use Tests\TestCase;
 
-class UserAuthenticationTest extends TestCaseApi
+class UserAuthenticationTest extends TestCase
 {
     use RefreshDatabase;
 
@@ -17,10 +17,10 @@ class UserAuthenticationTest extends TestCaseApi
 
         $this->json('GET', route('api.user.profile'))->assertStatus(401);
 
-        $response = $this->json('POST', route('api.user.login'), [
+        $response = $this->jsonPost([
             'email'=> $user->email,
             'password' => 'secret'
-        ])->assertStatus(200);
+        ], route('api.user.login'));
 
         $this->assertArrayHasKey('access_token', $response->json());
 

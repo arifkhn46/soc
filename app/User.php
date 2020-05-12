@@ -45,6 +45,14 @@ class User extends Authenticatable
     }
 
     /**
+     * Get the tasks a user have.
+     */
+    public function tasks()
+    {
+        return $this->hasMany(\App\Task::class, 'owner_id');
+    }
+
+    /**
      * Determine if the user is an administrator.
      *
      * @return bool

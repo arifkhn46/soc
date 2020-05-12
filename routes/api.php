@@ -21,7 +21,7 @@ Route::prefix('v1')->group(function(){
         Route::post('login', 'Api\Auth\LoginController@login')->name('api.user.login');
         // Route::post('register', 'Api\RegisterController@register')->name('api.user.register');
         Route::group(['middleware' => 'auth:sanctum'], function(){
-            // Route::post('getUser', 'Api\AuthController@profile');
+            Route::post('task', 'Api\TaskController@store')->name('api.task.create');
             Route::get('/user', function (Request $request) {
                     return $request->user();
                 })->name('api.user.profile');

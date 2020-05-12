@@ -15,7 +15,10 @@ abstract class TestCase extends BaseTestCase
     protected function signIn($user = null)
     {
         $user = $user ?: create('App\User');
-        $this->actingAs($user);
+        Sanctum::actingAs(
+            $user,
+            ['*']
+        );
         return $this;
     }
 
@@ -35,6 +38,20 @@ abstract class TestCase extends BaseTestCase
         $teacher = create('App\User', $overrides);
         $this->actingAs($teacher);
         return $teacher;
+    }
+
+
+    /**
+     * Json Post helper
+     */
+    public function jsonPost(array $data, string $route, $headers = [])
+    {
+        if ($headers) {
+            $this->withHeaders($headers);
+        }
+
+        return $this->json('POST', $route, $data);
+
     }
 
 }

@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateSubjectsTable extends Migration
+class CreateChaptersTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,9 +13,13 @@ class CreateSubjectsTable extends Migration
      */
     public function up()
     {
-        Schema::create('subjects', function (Blueprint $table) {
-            $table->id();
+        Schema::create('chapters', function (Blueprint $table) {
+            $table->increments('id');
+            $table->unsignedInteger('subject_id');
             $table->timestamps();
+
+            $table->foreign('subject_id')
+                ->references('id')->on('subjects');
         });
     }
 
@@ -26,6 +30,6 @@ class CreateSubjectsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('subjects');
+        Schema::dropIfExists('chapters');
     }
 }

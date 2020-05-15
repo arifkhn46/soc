@@ -12,7 +12,8 @@ class WelcomeController extends Controller
     {
     	if (Auth::check()) {
     		return redirect('home');
-    	}
+        }
+        return redirect('login');
         $courseTypes = CourseType::latest()->get();
         return view('welcome', ['courseTypes' => $courseTypes]);
     }

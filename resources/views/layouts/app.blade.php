@@ -2,17 +2,18 @@
 
 @section('pageTitle', config('app.name', ''))
 
+@section('bodyClasses', 'bg-gray-100 leading-normal')
+
 @section('body')
     <div id="app">
+        <div>
+            @include('layouts.nav')
+        </div>
 
-        @include('layouts.nav')
-        @if(Session::has('flash'))
-            <div class="notification {{ Session::get('flash-class', '') }}">
-                {!! Session::get('flash') !!}
-            </div>
-        @endif
+        <div class="w-full mx-auto pt-4 max-w-screen-xl">
+            @include('partials/_flash')
+        </div>
 
         @yield('content')
-
     </div>
 @stop

@@ -8,8 +8,14 @@
 require('./bootstrap');
 
 window.Vue = require('vue');
+import VueRouter from 'vue-router'
 
 import mixin from './plugins/mixin';
+import Example from './components/Example.vue';
+
+
+Vue.use(VueRouter)
+
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to
@@ -21,6 +27,18 @@ import mixin from './plugins/mixin';
 Vue.component('login-form', require('./components/LoginForm.vue'));
 Vue.component('registration-form', require('./components/RegistrationForm.vue'));
 
+const router = new VueRouter({
+    mode: 'history',
+    routes: [
+        {
+            path: '/example',
+            name: 'example',
+            component: Example,
+        },
+    ],
+});
+
 const app = new Vue({
     el: '#app',
+    router,
 });

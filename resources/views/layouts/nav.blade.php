@@ -1,5 +1,5 @@
 <div id="header">
-    <div class="flex bg-white border-b border-gray-200 h-16 text-gray-600" role="navigation" aria-label="main navigation">
+    <div class="flex bg-white border-b border-gray-200 h-16 text-gray-600 p-2 mt-0 fixed w-full z-10 pin-t" role="navigation" aria-label="main navigation">
         <div class="w-full px-16">
             <div class="w-full flex items-center h-full py-3">
                 <div class="flex items-center h-full">
@@ -20,9 +20,9 @@
 
                         @else
                             <div class="navbar-item has-dropdown is-hoverable">
-                                <a class="navbar-link">
+                                <!-- <a class="px-4 flex items-center hover:text-gray-900 h-full hover:bg-gray-100 rounded">
                                     Dashboard
-                                </a>
+                                </a> -->
                                 <div class="navbar-dropdown">
                                 </div>
                             </div>
@@ -33,10 +33,10 @@
                             <a class="px-4 flex items-center hover:text-gray-900 h-full hover:bg-gray-100 rounded" href="{{ route('login') }}">Login</a>
                             <a class="px-4 flex items-center hover:text-gray-900 h-full hover:bg-gray-100 rounded" href="{{ route('register') }}">Register</a>
                         @else
-                            <a class="navbar-item" href="#">
+                            <a class="px-4 flex items-center hover:text-gray-900 h-full hover:bg-gray-100 rounded" href="#">
                                 Welcome, {{ Auth::user()->name }}
                             </a>
-                            <a class="navbar-item" href="{{ route('logout') }}"
+                            <a class="px-4 flex items-center hover:text-gray-900 h-full hover:bg-gray-100 rounded" href="{{ route('logout') }}"
                                 onclick="event.preventDefault();
                                         document.getElementById('logout-form').submit();">
                                                     Logout

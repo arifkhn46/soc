@@ -1,7 +1,9 @@
 @if ($message = Session::get('success'))
-  <div class="bg-blue-100 border border-blue-500 text-blue-700 px-4 py-3" role="alert">
-    <!-- <p class="font-bold">Informational message</p> -->
-    <p class="text-sm">{{ $message }}</p>
+  <div class="w-full mx-auto pt-20 max-w-screen-xl">
+    <div class="bg-blue-100 border border-blue-500 text-blue-700 px-4 py-3" role="alert">
+      <!-- <p class="font-bold">Informational message</p> -->
+      <p class="text-sm">{{ $message }}</p>
+    </div>
   </div>
 @endif
 

@@ -10,9 +10,7 @@
             @include('layouts.nav')
         </div>
 
-        <div class="w-full mx-auto pt-4 max-w-screen-xl">
-            @include('partials/_flash')
-        </div>
+        @include('partials/_flash')
 
         @yield('content')
     </div>

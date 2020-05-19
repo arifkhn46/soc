@@ -1,28 +1,53 @@
 <template>
   <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+    <Header />
+    <div class="min-h-screen" v-if="isAuthenticated">
+      <div class="pt-16 flex flex-1 h-screen">
+        <div class="w-56 bg-white">
+          <Sidebar />
+        </div>
+        <div class="flex-1 pt-8 pl-8 ">
+          <!-- <div class="w-full h-8 bg-white" v-text="pageTitle" v-if="pageTitle"></div> -->
+          <page-transition>
+            <router-view class="view"></router-view>
+          </page-transition>
+        </div>
+      </div>
+    </div>
+    <div class="min-h-screen" v-if="!isAuthenticated" >
+      <div class="pt-16">
+        <page-transition>
+          <router-view class="view"></router-view>
+        </page-transition>
+      </div>
+    </div>
+
+    <notifications position="bottom right" group="app" />
+
   </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
+// console.log(process.env);
+import Header from '@/components/Header.vue'
+import Sidebar from '@/components/Sidebar.vue'
+import PageTransition from '@/components/PageTransition.vue'
+
+import { mapState } from 'vuex'
 
 export default {
   name: 'App',
+  computed: mapState('User', ['isAuthenticated']),
   components: {
-    HelloWorld
-  }
+    Header,
+    Sidebar,
+    PageTransition
+  },
+  watch: {
+    '$route' (to) {
+      this.pageTitle = to.meta.title || '';
+      document.title = to.meta.title || 'SSCONLINECOACHING.COM';
+    }
+  },
 }
 </script>
-
-<style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-}
-</style>

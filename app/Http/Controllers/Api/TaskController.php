@@ -5,9 +5,22 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
+use App\Http\Resources\TaskCollection;
+use App\Http\Resources\TaskResource;
+
 
 class TaskController extends Controller
 {
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function index()
+    {
+        return new TaskCollection(auth()->user()->tasks()->get());
+    }
+
     /**
      * Store a newly created task.
      *
@@ -46,11 +59,16 @@ class TaskController extends Controller
             'start_at' => 'required|date_format:Y-m-d H:i:s',
             'end_at' => 'required|date_format:Y-m-d H:i:s|after:start_at',
         ]);
-
-        auth()->user()->tasks()->create($task);
-
-        return  response()
-                    ->json(['message' => $task['title'] . ' created!'])
-                    ->setStatusCode(Response::HTTP_CREATED);
+        
+        if (!$request->get('assignee_id')) {
+            $task['assignee_id'] = auth()->id();
+        }
+        
+        $task = auth()->user()->tasks()->create($task);
+                
+        return (new TaskResource($task))
+                    ->additional([
+                        'message' => $task['title'] . ' created!',
+                    ]);
     }
 }

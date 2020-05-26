@@ -22,10 +22,10 @@ class UserAuthenticationTest extends TestCase
             'password' => 'secret'
         ], route('api.user.login'));
 
-        $this->assertArrayHasKey('access_token', $response->json());
+        $this->assertArrayHasKey('access_token', $response->json()['data']);
 
         $this->withHeaders([
-            'Authorization' => 'Bearer '. $response->json()['access_token'],
+            'Authorization' => 'Bearer '. $response->json()['data']['access_token'],
         ])->json('GET', route('api.user.profile'))->assertStatus(200);
     }
 }

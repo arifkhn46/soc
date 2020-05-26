@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
+use App\Http\Resources\UserResource;
 
 class LoginController extends Controller
 {
@@ -52,9 +53,7 @@ class LoginController extends Controller
 
         $this->clearLoginAttempts($request);
 
-        return  response()
-                    ->json($this->authenticated($request, $this->guard()->user()))
-                    ->setStatusCode(Response::HTTP_OK);
+        return $this->authenticated($request, $this->guard()->user());
     }
 
     /**
@@ -66,6 +65,7 @@ class LoginController extends Controller
      */
     protected function authenticated(Request $request, $user)
     {
-        return ['access_token' => $user->createToken('login-token')->plainTextToken];
+        $userCollection = new UserResource($user);
+        return $userCollection;
     }
 }

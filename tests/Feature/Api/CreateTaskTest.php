@@ -308,12 +308,12 @@ class CreateTaskTest extends TestCase
     /** @test */
     public function authenticated_user_can_create_a_task()
     {
-        // $this->withoutExceptionHandling();
+        $this->withoutExceptionHandling();
 
         $this->signIn();
 
         $task = $this->makeATask();
-        
+
         $this->jsonPost($task->toArray(),$this->createTaskRoute)
             ->assertStatus(Response::HTTP_CREATED)
             ->assertJson([
@@ -333,7 +333,7 @@ class CreateTaskTest extends TestCase
         $this->signIn();
 
         $task = $this->makeATask();
-        
+
         $this->jsonPost($task->toArray(),$this->createTaskRoute)
             ->assertStatus(Response::HTTP_CREATED)
             ->assertJson([
@@ -357,7 +357,7 @@ class CreateTaskTest extends TestCase
             ->assertStatus(Response::HTTP_CREATED);
 
         $this->assertDatabaseHas('tasks', ['title' => $task->title, 'assignee_id' => auth()->id()]);
-      
+
     }
 
     /** @test */
@@ -369,7 +369,7 @@ class CreateTaskTest extends TestCase
             ->assertStatus(Response::HTTP_UNAUTHORIZED);
     }
 
-    private function makeATask(array $attributes = [], string $state = '')
+    private function makeATask(array $attributes = [], string $state = 'created')
     {
         return make('App\Task', $attributes, null, $state);
     }

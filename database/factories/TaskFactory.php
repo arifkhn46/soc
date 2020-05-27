@@ -10,7 +10,7 @@ use App\Enum\TaskState;
 $factory->define(Task::class, function (Faker $faker) {
     $startingDate = new Carbon\Carbon();
     $subject = factory(Subject::class)->create();
-    
+
     return [
         'title' => $faker->text(10),
         'description' => $faker->text(200),
@@ -28,4 +28,8 @@ $factory->define(Task::class, function (Faker $faker) {
 
 $factory->state(Task::class, 'created', [
     'state' => TaskState::created(),
+]);
+
+$factory->state(Task::class, 'assigned', [
+    'state' => TaskState::assigned(),
 ]);

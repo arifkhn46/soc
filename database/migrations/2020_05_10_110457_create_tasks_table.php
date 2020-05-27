@@ -3,6 +3,9 @@
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
+use App\Enum\TaskState;
+use App\Enum\TaskType;
+
 
 class CreateTasksTable extends Migration
 {
@@ -17,8 +20,8 @@ class CreateTasksTable extends Migration
             $table->id();
             $table->string('title');
             $table->text('description');
-            $table->unsignedInteger('type');
-            $table->unsignedInteger('state');
+            $table->enum('type', TaskType::getAllTypesId());
+            $table->enum('state', TaskState::getAllStateIds());
             $table->dateTime('start_at');
             $table->dateTime('end_at');
             $table->unsignedInteger('subject_id');

@@ -13,7 +13,11 @@ class Task extends Model
      */
     protected $casts = [
         'owner_id' => 'integer',
-        'state' => 'integer'
+        'subject_id' => 'integer',
+        'chapter_id' => 'integer',
+        'type' => 'integer',
+        'state' => 'integer',
+        // 'assignee_id' => 'integer'
     ];
 
     /**

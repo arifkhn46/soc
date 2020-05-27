@@ -7,7 +7,7 @@ use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use App\Http\Resources\TaskCollection;
 use App\Http\Resources\TaskResource;
-
+use App\Enum\TaskState;
 
 class TaskController extends Controller
 {
@@ -33,7 +33,7 @@ class TaskController extends Controller
             'title' => 'required',
             'description' => 'required',
             'type' => 'required|int',
-            'state' => 'required|int',
+            // 'state' => 'required|int',
             'subject_id' => 'required|exists:subjects,id',
             'chapter_id' => ['required', 'exists:chapters,id', function($attribute, $value, $fail) use($request) {
                 $chapter = \DB::table('chapters')->where([
@@ -64,8 +64,12 @@ class TaskController extends Controller
             $task['assignee_id'] = auth()->id();
         }
         
+        $task['state'] = TaskState::created();
+        
         $task = auth()->user()->tasks()->create($task);
-                
+        
+        //default state
+        
         return (new TaskResource($task))
                     ->additional([
                         'message' => $task['title'] . ' created!',

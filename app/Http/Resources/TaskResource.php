@@ -5,6 +5,9 @@ namespace App\Http\Resources;
 use Illuminate\Http\Resources\Json\JsonResource;
 use Carbon\Carbon;
 use Illuminate\Support\Arr;
+use App\Enum\TaskType;
+use App\Enum\TaskState;
+
 
 class TaskResource extends JsonResource
 {
@@ -23,15 +26,12 @@ class TaskResource extends JsonResource
      */
     public function toArray($request)
     {
-        $task_types = config('soc.task_types');
-        $type = Arr::first($task_types, function ($value, $key) {
-            return $value['id' ] == $this->type;
-        });
+        $type = TaskType::getName($this->type);
         
         return [
             'title' => $this->title,
             'description' => $this->description,
-            'type' => $type['name'],
+            'type' => $type,
             'subject' => $this->subject->name,
             'chapter' => $this->chapter->name,
             'start_at' => Carbon::parse($this->start_at)->format('d-m-Y H:m:s'),
@@ -39,6 +39,7 @@ class TaskResource extends JsonResource
             'created_at' => Carbon::parse($this->created_at)->format('d-m-Y H:m:s'),
             'updated_at' => Carbon::parse($this->updated_at)->format('d-m-Y H:m:s'),
             'owner_id' => $this->owner_id,
+            'state' => TaskState::getName($this->state),
             'id' => $this->id,
         ];
     }

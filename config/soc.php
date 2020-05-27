@@ -16,8 +16,9 @@ return [
   ],
   'task_states' => [
     ['id' => 1, 'name' => 'Created'],
-    ['id' => 2, 'name' => 'In progress'],
-    ['id' => 3, 'name' => 'On hold'],
-    ['id' => 4, 'name' => 'Completed']
+    ['id' => 2, 'name' => 'Assigned'],
+    ['id' => 3, 'name' => 'In progress'],
+    ['id' => 4, 'name' => 'On hold'],
+    ['id' => 5, 'name' => 'Completed']
   ],
 ];

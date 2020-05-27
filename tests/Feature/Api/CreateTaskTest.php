@@ -6,6 +6,7 @@ use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
 use Tests\TestCase;
 use Illuminate\Http\Response;
+use App\Enum\TaskState;
 
 class CreateTaskTest extends TestCase
 {
@@ -118,33 +119,33 @@ class CreateTaskTest extends TestCase
     }
 
     /** @test */
-    public function a_task_requires_a_state_of_type_integer()
-    {
-        $this->signIn();
+    // public function a_task_requires_a_state_of_type_integer()
+    // {
+    //     $this->signIn();
 
-        $task = make('App\Task');
+    //     $task = make('App\Task');
 
-        $this->jsonPost($task->toArray(), $this->createTaskRoute)
-            ->assertStatus(Response::HTTP_UNPROCESSABLE_ENTITY)
-            ->assertJson([
-                'errors' => ['state' => []]
-            ]);
+    //     $this->jsonPost($task->toArray(), $this->createTaskRoute)
+    //         ->assertStatus(Response::HTTP_UNPROCESSABLE_ENTITY)
+    //         ->assertJson([
+    //             'errors' => ['state' => []]
+    //         ]);
 
-        $task->state = 'string';
+    //     $task->state = 'string';
 
-        $this->jsonPost($task->toArray(), $this->createTaskRoute)
-            ->assertStatus(Response::HTTP_UNPROCESSABLE_ENTITY)
-            ->assertJson([
-                'errors' => ['state' => []]
-            ]);
+    //     $this->jsonPost($task->toArray(), $this->createTaskRoute)
+    //         ->assertStatus(Response::HTTP_UNPROCESSABLE_ENTITY)
+    //         ->assertJson([
+    //             'errors' => ['state' => []]
+    //         ]);
 
 
-        $task = $this->makeATask();
+    //     $task = $this->makeATask();
 
-        $this->jsonPost($task->toArray(),$this->createTaskRoute)
-            ->assertStatus(Response::HTTP_CREATED);
+    //     $this->jsonPost($task->toArray(),$this->createTaskRoute)
+    //         ->assertStatus(Response::HTTP_CREATED);
 
-    }
+    // }
 
 
 
@@ -325,6 +326,27 @@ class CreateTaskTest extends TestCase
     }
 
     /** @test */
+    public function the_state_must_be_set_to_created_on_creating_a_task()
+    {
+        $task_state_created = 1;
+
+        $this->signIn();
+
+        $task = $this->makeATask();
+        
+        $this->jsonPost($task->toArray(),$this->createTaskRoute)
+            ->assertStatus(Response::HTTP_CREATED)
+            ->assertJson([
+                'task' => [
+                    'title' => $task->title,
+                    'state' => TaskState::getName($task_state_created),
+                ]
+            ]);
+
+        $this->assertDatabaseHas('tasks', ['title' => $task->title, 'state' => $task_state_created]);
+    }
+
+    /** @test */
     public function authenticated_considered_as_assignee_if_assignee_id_is_not_given()
     {
         $this->signIn();
@@ -347,7 +369,7 @@ class CreateTaskTest extends TestCase
             ->assertStatus(Response::HTTP_UNAUTHORIZED);
     }
 
-    private function makeATask(array $attributes = [], string $state = 'created')
+    private function makeATask(array $attributes = [], string $state = '')
     {
         return make('App\Task', $attributes, null, $state);
     }

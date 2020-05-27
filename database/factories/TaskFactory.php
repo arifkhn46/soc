@@ -5,6 +5,7 @@
 use App\Task;
 use Faker\Generator as Faker;
 use App\Subject;
+use App\Enum\TaskState;
 
 $factory->define(Task::class, function (Faker $faker) {
     $startingDate = new Carbon\Carbon();
@@ -26,5 +27,5 @@ $factory->define(Task::class, function (Faker $faker) {
 
 
 $factory->state(Task::class, 'created', [
-    'state' => 0
+    'state' => TaskState::created(),
 ]);

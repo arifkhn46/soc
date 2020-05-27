@@ -7,5 +7,11 @@ function create($class, $attributes = [], $times = null)
 
 function make($class, $attributes = [], $times = null, $states = [])
 {
-    return factory($class, $times)->states($states)->make($attributes);
+    $factory = factory($class, $times);
+    
+    if ($states) {
+        $factory->states($states);
+    }
+
+    return $factory->make($attributes);
 }

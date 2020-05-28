@@ -11,14 +11,14 @@ const getters = {
   getTypes: state => state.types,
   getTasks: state => state.tasks,
   getTodaysTasks(state) {
-    
+
     if (state.tasks.length) {
       const now = moment();
       let todayDate = now.format('DD-MM-YYYY');
       let tasks = filter(state.tasks, function(task){
         let taskDate = moment(task.start_at, 'DD-MM-YYYY hh:mm:ss').format('DD-MM-YYYY')
         return (taskDate === todayDate);
-      
+
       });
       return tasks;
     }
@@ -71,7 +71,7 @@ const actions = {
       }
 
     })
-  } 
+  }
 }
 
 const mutations = {

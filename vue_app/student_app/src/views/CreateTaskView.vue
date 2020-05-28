@@ -46,7 +46,10 @@
                   ></v-select>
                   <v-row>
                     <v-col cols="12" md="6">
-                      <v-datetime-picker label="Start date" v-model="start_at">
+                      <v-datetime-picker
+                        label="Start date"
+                        v-model="start_at"
+                      >
                         <template slot="dateIcon">
                           <v-icon>mdi-calendar</v-icon>
                         </template>
@@ -104,11 +107,11 @@
 
 <script>
 import { mapGetters, mapActions } from 'vuex'
-import { format } from 'date-fns'
+import moment from "moment"
 import { isEmpty } from 'lodash'
 
-const DEFAULT_DATE_FORMAT = 'yyyy-MM-dd'
-const DEFAULT_TIME_FORMAT = 'HH:mm:ss'
+const DEFAULT_DATE_FORMAT = 'YYYY-MM-DD'
+const DEFAULT_TIME_FORMAT = 'hh:mm:ss'
 
 export default {
   data: () => ({
@@ -175,19 +178,19 @@ export default {
           title: this.title,
           description: this.description,
           type: this.type,
-          start_at: format(this.start_at, this.defaultDateTimeFormat),
-          end_at: format(this.end_at, this.defaultDateTimeFormat),
+          start_at: moment(this.start_at).format(this.defaultDateTimeFormat),
+          end_at: moment(this.end_at).format(this.defaultDateTimeFormat),
           subject_id: this.subject_id,
           chapter_id: this.chapter_id
         };
-        
+
         this.createTask(data)
           .then((response) => {
             this.messageType = "success"
             this.message = "Task has been created!"
             this.resetForm()
             this.resetValidation()
-            
+
           })
           .catch((error) => {
             let data = error.response.data
@@ -197,7 +200,7 @@ export default {
                     this.message = data.errors[key][0]
                     break
                 }
-            } 
+            }
             else {
               this.message = data.message
             }

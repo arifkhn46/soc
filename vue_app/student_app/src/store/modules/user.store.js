@@ -27,8 +27,8 @@ const actions = {
       // and commit the data
       userApi.login(data.email, data.password)
         .then((response) => {
-          commit('setUser', response.data)
-          resolve(response)
+          commit('setUser', response.data.data)
+          resolve(response.data.data)
         })
         .catch( error => {
           reject(error)
@@ -92,7 +92,7 @@ const mutations = {
     }
     state.access_token = access_token
     state.isAuthenticated = true
-    
+
     if (access_token) {
       localStorage.setItem('access_token', access_token)
     }

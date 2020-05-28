@@ -59,7 +59,7 @@
               </v-card-text>
               <v-card-actions>
                 <v-spacer></v-spacer>
-                <v-btn 
+                <v-btn
                   color="primary"
                   :disabled="!valid"
                   @click="validate"
@@ -91,7 +91,7 @@ export default {
   }),
   methods: {
     validate () {
-    
+
       if (this.$refs.form.validate()) {
         let data = {
           email: this.email,
@@ -99,8 +99,8 @@ export default {
         }
         this.$store.dispatch('User/authenticate', data)
           .then((response) => {
-            if (response.data.access_token) {
-              // this.$router.push('/dashboard')
+            if (response.access_token) {
+              this.$router.push('/')
               this.resetErrors()
             }
           })
@@ -113,7 +113,7 @@ export default {
                       this.errors = data.errors[key][0]
                       break
                   }
-              } 
+              }
               else {
                 this.errors = data.message
               }

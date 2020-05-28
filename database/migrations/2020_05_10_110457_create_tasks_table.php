@@ -24,8 +24,8 @@ class CreateTasksTable extends Migration
             $table->enum('state', TaskState::getAllStateIds());
             $table->dateTime('start_at');
             $table->dateTime('end_at');
-            $table->unsignedInteger('subject_id');
-            $table->unsignedInteger('chapter_id');
+            $table->unsignedInteger('subject_id')->nullable();
+            $table->unsignedInteger('chapter_id')->nullable();
             $table->unsignedInteger('assignee_id')->nullable();
             $table->unsignedInteger('owner_id');
             $table->timestamps();

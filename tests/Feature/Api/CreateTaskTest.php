@@ -91,8 +91,10 @@ class CreateTaskTest extends TestCase
     }
 
     /** @test */
-    public function a_task_requires_a_subject()
+    public function a_task_requires_a_subject_if_set()
     {
+        // $this->withoutExceptionHandling();
+
         $this->signIn();
 
         $task = $this->makeATask(['subject_id' => '']);
@@ -111,9 +113,21 @@ class CreateTaskTest extends TestCase
                 'errors' => ['subject_id' => []]
             ]);
 
-        $task = $this->makeATask();
+        $task3 = $this->makeATask();
+    
+        $data = $task3->toArray();
+        unset($data['chapter_id']);
 
-        $this->jsonPost($task->toArray(),$this->createTaskRoute)
+        $this->jsonPost($data, $this->createTaskRoute)
+            ->assertStatus(Response::HTTP_CREATED);
+
+        $task = $this->makeATask();
+        
+        $data = $task->toArray();
+        unset($data['subject_id']);
+        unset($data['chapter_id']);
+
+        $this->jsonPost($data, $this->createTaskRoute)
             ->assertStatus(Response::HTTP_CREATED);
 
     }
@@ -235,7 +249,7 @@ class CreateTaskTest extends TestCase
 
 
     /** @test */
-    public function a_task_requires_a_chapter_id()
+    public function a_task_requires_a_chapter_id_if_set()
     {
         $this->signIn();
 
@@ -256,8 +270,25 @@ class CreateTaskTest extends TestCase
             ]);
 
         $task3 = $this->makeATask();
+        
         $this->jsonPost($task3->toArray(), $this->createTaskRoute)
             ->assertStatus(Response::HTTP_CREATED);
+
+        $task4 = $this->makeATask();
+
+        $data = $task4->toArray();
+        unset($data['chapter_id']);
+
+        $this->jsonPost($data, $this->createTaskRoute)
+            ->assertStatus(Response::HTTP_CREATED);
+
+        $task5 = $this->makeATask();
+
+        $data = $task5->toArray();
+        unset($data['subject_id']);
+
+        $this->jsonPost($data, $this->createTaskRoute)
+            ->assertStatus(Response::HTTP_UNPROCESSABLE_ENTITY);
 
     }
 

@@ -94,8 +94,8 @@ class TaskController extends Controller
             'title' => 'required',
             'description' => 'required',
             'type' => 'required|int|in:' . implode(',', TaskType::getAllTypesId()),
-            'subject_id' => 'required|exists:subjects,id',
-            'chapter_id' => ['required', 'exists:chapters,id', function($attribute, $value, $fail) use($request) {
+            'subject_id' => 'sometimes|required|exists:subjects,id',
+            'chapter_id' => ['sometimes', 'required', 'exists:chapters,id', function($attribute, $value, $fail) use($request) {
                 $chapter = \DB::table('chapters')->where([
                     ['subject_id', '=', $request->get('subject_id')],
                     ['id', '=', $value],

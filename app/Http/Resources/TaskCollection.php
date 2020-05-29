@@ -3,6 +3,8 @@
 namespace App\Http\Resources;
 
 use Illuminate\Http\Resources\Json\ResourceCollection;
+use App\Enum\TaskState;
+use App\Enum\TaskType;
 
 class TaskCollection extends ResourceCollection
 {
@@ -26,5 +28,21 @@ class TaskCollection extends ResourceCollection
         });
 
         return parent::toArray($request);
+    }
+
+    /**
+     * Get additional data that should be returned with the resource array.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return array
+     */
+    public function with($request)
+    {
+        return [
+            'meta' => [
+                'states' => TaskState::all(),
+                'types' => TaskType::all(),
+            ],
+        ];
     }
 }

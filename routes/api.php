@@ -24,7 +24,8 @@ Route::prefix('v1')->group(function(){
         Route::group(['middleware' => 'auth:sanctum'], function(){
             Route::post('tasks', 'Api\TaskController@store')->name('api.task.create');
             Route::get('tasks', 'Api\TaskController@index')->name('api.task.my_tasks');
-            Route::patch('tasks/{task}', 'Api\TaskController@update')->name('api.task.update');
+            Route::patch('tasks/{task}/update', 'Api\TaskController@update')->name('api.task.update');
+            Route::delete('tasks/{task}/delete', 'Api\TaskController@destroy')->name('api.task.delete');
             Route::get('/user', function (Request $request) {
                     return new App\Http\Resources\UserResource($request->user());
                 })->name('api.user.profile');

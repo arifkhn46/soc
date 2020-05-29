@@ -9,7 +9,7 @@ final class TaskType
 {
   public static function __callStatic($name, $arguments)
   {
-    $types = self::getTypes();
+    $types = self::all();
     $type = Arr::first($types, function ($value, $key) use ($name){
       return Str::lower(str_replace(' ', '', $value['name'])) == Str::lower($name);
     });
@@ -25,7 +25,7 @@ final class TaskType
     return $type['name'];
   }
 
-  private static function getTypes()
+  static function all()
   {
     return config('soc.task_types');
   }

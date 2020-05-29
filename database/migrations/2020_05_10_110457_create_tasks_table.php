@@ -29,6 +29,7 @@ class CreateTasksTable extends Migration
             $table->unsignedInteger('assignee_id')->nullable();
             $table->unsignedInteger('owner_id');
             $table->timestamps();
+            $table->softDeletes();
 
             $table->foreign('subject_id')
                 ->references('id')->on('subjects');

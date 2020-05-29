@@ -38,7 +38,7 @@ class TaskController extends Controller
             $task['assignee_id'] = auth()->id();
         }
 
-        $task['state'] = TaskState::created();
+        $task['state'] = TaskState::assigned();
 
         $task = auth()->user()->tasks()->create($task);
 
@@ -86,6 +86,21 @@ class TaskController extends Controller
                 ->additional([
                     'message' => $task['title'] . ' updated!',
                 ]);
+    }
+
+    /**
+     * Destroy the task.
+     *
+     * @param  Task $task
+     * @return \Illuminate\Http\RedirectResponse
+     * @throws \Illuminate\Auth\Access\AuthorizationException
+     */
+    public function destroy(Task $task)
+    {
+        $task->delete();
+        
+        return response()
+                ->json(['message' => 'Task deleted']);
     }
 
     private function validateRequest(Request $request,  $rules = [])

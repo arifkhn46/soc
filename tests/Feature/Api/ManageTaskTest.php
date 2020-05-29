@@ -7,32 +7,48 @@ use Illuminate\Foundation\Testing\WithFaker;
 use Tests\TestCase;
 use Illuminate\Http\Response;
 use App\Enum\TaskState;
+use App\Enum\TaskType;
+
 
 class ManageTaskTest extends TestCase
 {
     use RefreshDatabase;
 
     /** @test */
-    public function a_user_can_fetch_its_created_tasks()
+    public function a_user_can_fetch_its_non_deleted_tasks()
     {
-        $this->withoutExceptionHandling();
         $this->signIn();
         $owner_id = auth()->id();
 
-        $task = create('App\Task', ['owner_id' => $owner_id, 'assignee_id' => $owner_id], null, 'created')->first();
+        $tasks = create('App\Task', ['owner_id' => $owner_id, 'assignee_id' => $owner_id], 2, 'created');
+        $task1 = $tasks->first();
+        $task2 = $tasks[1];
+        
 
         $this->json('GET', route('api.task.my_tasks'))
             ->assertStatus(Response::HTTP_OK)
             ->assertJson([
                 'tasks' => [
                     [
-                        'id' => $task->id,
-                        'title' => $task->title,
+                        'id' => $task1->id,
+                        'title' => $task1->title,
+                        'owner_id' => $owner_id
+                    ]
+                ],
+                'meta' => [
+                    'states' => TaskState::all(), 
+                    'types' => TaskType::all(),
+                ]
+            ])
+            ->assertJsonMissing([
+                'tasks' => [
+                    [
+                        'id' => $task2->id,
+                        'title' => $task2->title,
                         'owner_id' => $owner_id
                     ]
                 ]
             ]);
-
     }
 
     /** @test */
@@ -92,5 +108,22 @@ class ManageTaskTest extends TestCase
                 'errors' => ['state' => []]
             ]);
 
+    }
+
+    /** @test */
+    public function a_user_can_delete_his_task()
+    {
+        $this->withoutExceptionHandling();
+
+        $this->signIn();
+
+        $task = create('App\Task', ['owner_id' => auth()->id()] , null, 'assigned')->first();
+        $this->deleteJson(route('api.task.delete', ['task' => $task->id]))
+            ->assertStatus(Response::HTTP_OK);
+        
+        $this->assertSoftDeleted('tasks', [
+            'id' => $task->id,
+            'title' => $task->title,
+        ]);
     }
 }

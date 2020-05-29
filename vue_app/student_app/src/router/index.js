@@ -4,7 +4,7 @@ import LoginView from '@/views/LoginView.vue'
 import RegisterView from '@/views/RegisterView.vue'
 import CreateTaskView from '@/views/CreateTaskView.vue'
 import TasksList from '@/views/TasksList.vue'
-import TodayTasksListView from '@/views/TodayTasksListView.vue'
+
 
 
 import store from '@/store'
@@ -49,17 +49,11 @@ const routes = [
     name: 'create-task',
     component: CreateTaskView,
     beforeEnter: isAuthenticated
-  },
+  }, 
   {
     path: '/tasks',
     name: 'tasks',
     component: TasksList,
-    beforeEnter: isAuthenticated
-  },
-  {
-    path: '/todays-tasks',
-    name: 'todays-tasks',
-    component: TodayTasksListView,
     beforeEnter: isAuthenticated
   },
   {

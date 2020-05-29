@@ -6,22 +6,46 @@ const createTask = (
   type,
   start_at,
   end_at,
-  subject_id,
-  chapter_id
+  optionalData
   ) => httpClient.post('api/v1/tasks', {
   title,
   description,
   type,
   start_at,
   end_at,
-  subject_id,
-  chapter_id,
-  state: 1
+  state: 1,
+  ...optionalData
 });
 
 const getTasks = () => httpClient.get('api/v1/tasks');
+const updateTask = (
+  id,
+  title,
+  description,
+  type,
+  start_at,
+  end_at,
+  state,
+  optionalData) => httpClient.post(`api/v1/tasks/${id}/update`, {
+    id,
+    title,
+    description,
+    type,
+    start_at,
+    end_at,
+    state,
+    ...optionalData,
+    _method: 'patch'
+  })
+
+const deleteTask = (id) => httpClient.post(`api/v1/tasks/${id}/delete`, {
+  id,
+  _method: 'delete'
+})
 
 export default {
   createTask,
-  getTasks
+  getTasks,
+  updateTask,
+  deleteTask,
 }

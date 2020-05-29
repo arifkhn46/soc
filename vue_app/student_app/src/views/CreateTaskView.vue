@@ -78,7 +78,6 @@
                     required
                     outlined
                     @change="subjectSelected"
-                    :rules="subjectRules"
                   ></v-select>
                   <v-select
                     :items="subjectChapters"
@@ -88,7 +87,7 @@
                     v-model="chapter_id"
                     required
                     outlined
-                    :rules="chapterRules"
+                    :rules="[validateChapter]"
                     v-if="subjectChapters.length"
                   ></v-select>
                 </v-col>
@@ -107,11 +106,7 @@
 
 <script>
 import { mapGetters, mapActions } from 'vuex'
-import moment from "moment"
 import { isEmpty } from 'lodash'
-
-const DEFAULT_DATE_FORMAT = 'YYYY-MM-DD'
-const DEFAULT_TIME_FORMAT = 'hh:mm:ss'
 
 export default {
   data: () => ({
@@ -140,13 +135,7 @@ export default {
       v => (v && !!v) || "Start datetime is required",
     ],
     subject_id: '',
-    subjectRules: [
-      v => (v && !!v) || "Please select a subject",
-    ],
     chapter_id: '',
-    chapterRules: [
-      v => (v && !!v) || "Please select a chapter",
-    ],
     subjectChapters: [],
   }),
   computed: {
@@ -159,6 +148,12 @@ export default {
     })
   },
   methods: {
+    validateChapter(value) {
+      if(!isEmpty(this.subject_id) && value) {
+        return "Please select a subject";
+      }
+      return true
+    },
     validate() {
       this.resetErrors()
       if (this.$refs.form.validate()) {
@@ -174,14 +169,18 @@ export default {
           return
         }
 
+        let optionalData = {};
+
+        if (this.subject_id) optionalData.subject_id = this.subject_id
+        if (this.chapter_id) optionalData.chapter_id = this.chapter_id
+
         let data = {
           title: this.title,
           description: this.description,
           type: this.type,
-          start_at: moment(this.start_at).format(this.defaultDateTimeFormat),
-          end_at: moment(this.end_at).format(this.defaultDateTimeFormat),
-          subject_id: this.subject_id,
-          chapter_id: this.chapter_id
+          start_at: this.start_at,
+          end_at: this.end_at,
+          optionalData: optionalData
         };
 
         this.createTask(data)

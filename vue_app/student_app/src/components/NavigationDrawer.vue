@@ -13,18 +13,18 @@
           <v-list-item-title>Create Task</v-list-item-title>
         </v-list-item-content>
       </v-list-item>
-      <v-list-item to="tasks">
+      <!-- <v-list-item to="tasks">
         <v-list-item-action>
         </v-list-item-action>
         <v-list-item-content>
           <v-list-item-title>Tasks</v-list-item-title>
         </v-list-item-content>
-      </v-list-item>
-      <v-list-item to="todays-tasks">
+      </v-list-item> -->
+      <v-list-item to="tasks">
         <v-list-item-action>
         </v-list-item-action>
         <v-list-item-content>
-          <v-list-item-title>Today's Tasks</v-list-item-title>
+          <v-list-item-title>My Tasks</v-list-item-title>
         </v-list-item-content>
       </v-list-item>
     </v-list>

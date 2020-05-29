@@ -357,9 +357,9 @@ class CreateTaskTest extends TestCase
     }
 
     /** @test */
-    public function the_state_must_be_set_to_created_on_creating_a_task()
+    public function the_state_must_be_set_to_assigned_on_creating_a_task()
     {
-        $task_state_created = 1;
+        $task_state_assigned = 2;
 
         $this->signIn();
 
@@ -370,11 +370,11 @@ class CreateTaskTest extends TestCase
             ->assertJson([
                 'task' => [
                     'title' => $task->title,
-                    'state' => TaskState::getName($task_state_created),
+                    'state_name' => TaskState::getName($task_state_assigned),
                 ]
             ]);
 
-        $this->assertDatabaseHas('tasks', ['title' => $task->title, 'state' => $task_state_created]);
+        $this->assertDatabaseHas('tasks', ['title' => $task->title, 'state' => $task_state_assigned]);
     }
 
     /** @test */

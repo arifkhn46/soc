@@ -4,7 +4,7 @@
       v-model="drawer"
       app
       clipped
-      v-if="user.id"
+      v-if="isAuthenticated"
     >
       <v-list dense>
         <v-list-item link>
@@ -28,12 +28,20 @@
 
     <v-app-bar
       app
-      color="indigo"
-      dark
+      color="white"
       clipped-left
     >
-      <v-app-bar-nav-icon @click.stop="drawer = !drawer" v-if="user.id"></v-app-bar-nav-icon>
+      <v-app-bar-nav-icon @click.stop="drawer = !drawer" v-if="isAuthenticated"></v-app-bar-nav-icon>
       <v-toolbar-title>SSCONLINECOACHING.COM</v-toolbar-title>
+      <v-spacer></v-spacer>
+      <v-row v-if="!isAuthenticated">
+        <div class="my-2">
+          <v-btn depressed color="white" href="/login">Login</v-btn>
+        </div>
+        <div class="my-2">
+          <v-btn depressed color="white">Register</v-btn>
+        </div>
+      </v-row>
     </v-app-bar>
   </div>
 </template>
@@ -44,5 +52,10 @@ export default {
   data: () => ({
     drawer: null,
   }),
+  computed: {
+    isAuthenticated() {
+      return this.user.id !== undefined;
+    }
+  },
 }
 </script>

@@ -63,3 +63,6 @@ Route::group([
   // Asset routes.
   Route::post('/assets/{content}/store', 'AssetsController@store')->name('teacher.assets.store');
 });
+
+
+Route::post('roles', 'RoleController@store')->middleware('auth')->name('role.create');

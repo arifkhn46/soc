@@ -13,7 +13,8 @@
         "laravel/helpers": "^1.2",
         "laravel/sanctum": "^2.3",
         "laravel/tinker": "^2.0",
-        "laravel/ui": "^2.0"
+        "laravel/ui": "^2.0",
+        "spatie/laravel-permission": "^3.13"
     },
     "require-dev": {
         "barryvdh/laravel-debugbar": "^3.3",

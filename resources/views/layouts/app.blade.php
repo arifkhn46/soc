@@ -5,7 +5,9 @@
 @section('bodyClasses', 'bg-gray-100 leading-normal')
 
 @section('body')
-    <div id="app">
+    <v-app id="app">
+    
+        <header-component :user="{{ Auth::user() ?: '{}' }}"></header-component>
         <div>
             @include('layouts.nav')
         </div>
@@ -13,5 +15,6 @@
         @include('partials/_flash')
 
         @yield('content')
-    </div>
+        
+    </v-app>
 @stop

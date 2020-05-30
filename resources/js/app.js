@@ -8,7 +8,11 @@ require('./bootstrap');
 
 window.Vue = require('vue');
 import vuetify from './plugins/vuetify';
+// import router from './router';
 
+import LoginFormComponent from './components/LoginFormComponent.vue';
+import HeaderComponent from './components/HeaderComponent.vue';
+import UserRolesComponent from './components/UserRolesComponent.vue';
 
 /**
  * The following block of code may be used to automatically register your
@@ -22,7 +26,9 @@ import vuetify from './plugins/vuetify';
 // const files = require.context('./', true, /\.vue$/i)
 // files.keys().map(key => Vue.component(key.split('/').pop().split('.')[0], files(key).default))
 
-Vue.component('header-component', require('./components/HeaderComponent.vue').default);
+Vue.component('header-component', HeaderComponent);
+Vue.component('login-form-component', LoginFormComponent);
+Vue.component('user-roles-component', UserRolesComponent);
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to

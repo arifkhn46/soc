@@ -65,4 +65,7 @@ Route::group([
 });
 
 
-Route::post('roles', 'RoleController@store')->middleware('auth')->name('role.create');
+Route::middleware(['auth:sanctum', 'role:' . getSuperAdminRoleName()])->group(function () {
+  Route::post('roles', 'RoleController@store')->name('role.store');
+  Route::get('roles/create', 'RoleController@create')->name('role.create');
+});

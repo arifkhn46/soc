@@ -24,7 +24,8 @@ class ManageRolesTest extends TestCase
         $this->member = factory(\App\User::class)->create();
 
         $this->admin = factory(\App\User::class)->create();
-        $this->admin->assignRole('admin');
+
+        $this->admin->assignRole(getSuperAdminRoleName());
 
     }
 
@@ -37,21 +38,19 @@ class ManageRolesTest extends TestCase
         Role::findOrCreate('instructor')
             ->givePermissionTo(['edit own posts']);
 
-        Role::findOrCreate('admin')
+        Role::findOrCreate(getSuperAdminRoleName())
             ->givePermissionTo(['create roles', 'delete any role', 'edit own posts']);
 
         $this->app->make(PermissionRegistrar::class)->registerPermissions();
     }
 
     /** @test */
-    public function admin_can_create_a_role()
+    public function authorized_can_create_a_role()
     {
-        // $this->withoutExceptionHandling();
-        
+        $this->signIn($this->admin);
         $role = make(\App\Model\Role::class);
 
-        $this->actingAs($this->admin)
-            ->post(route('role.create'), $role->toArray());
+        $this->post(route('role.store'), $role->toArray());
 
         $this->assertDatabaseHas('roles', ['name' => $role->name]);
     }
@@ -65,6 +64,6 @@ class ManageRolesTest extends TestCase
             ->post(route('role.create'), $role->toArray());
 
         $this->assertDatabaseMissing('roles', ['name' => $role->name]);
-      
+
     }
 }

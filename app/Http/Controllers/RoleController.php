@@ -15,12 +15,21 @@ class RoleController extends Controller
      */
     public function store(Request $request)
     {
-        $this->authorize('create', Role::class);
-
         $this->validate($request, ['name' => 'required|unique:roles']);
 
         Role::create($request->only('name'));
-        
+
         return redirect()->back();
+    }
+
+    /**
+     * Show the form for creating a new resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function create()
+    {
+        $roles = Role::where('name', '!=', \getSuperAdminRoleName())->get();
+        return view('role.create', ['roles' => $roles]);
     }
 }

@@ -6,15 +6,14 @@
 
 @section('body')
     <v-app id="app">
-    
+
         <header-component :user="{{ Auth::user() ?: '{}' }}"></header-component>
-        <div>
-            @include('layouts.nav')
-        </div>
 
         @include('partials/_flash')
 
-        @yield('content')
-        
+        <v-content class="grey lighten-4 fill-height" v-cloak>
+            @yield('content')
+        </v-content>
+
     </v-app>
 @stop

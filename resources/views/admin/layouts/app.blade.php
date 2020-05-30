@@ -13,21 +13,20 @@
     <!-- Styles -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
-    
+
 </head>
 <body>
-    <div id="app">
-        
-        @include('admin.layouts.nav')
-        @if(Session::has('flash'))
-            <div class="notification {{ Session::get('flash-class', '') }}">
-                {!! Session::get('flash') !!}
-            </div>
-        @endif
+    <v-app id="app">
 
-        @yield('content')
+        <header-component :user="{{ Auth::user() ?: '{}' }}"></header-component>
 
-    </div>
+        @include('partials/_flash')
+
+        <v-content class="grey lighten-4 fill-height">
+            @yield('content')
+        </v-content>
+
+    </v-app>
 
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}"></script>

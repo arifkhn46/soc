@@ -1,5 +1,5 @@
 @extends('layouts.app')
 
 @section('content')
-{{-- <login-form></login-form> --}}
+<login-form-component></login-form-component>
 @endsection

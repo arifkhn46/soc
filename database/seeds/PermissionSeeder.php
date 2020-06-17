@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Database\Seeder;
-use Spatie\Permission\Models\Permission;
+use App\Model\Permission;
 use Spatie\Permission\Models\Role;
 use Spatie\Permission\PermissionRegistrar;
 
@@ -18,10 +18,69 @@ class PermissionSeeder extends Seeder
         app()[PermissionRegistrar::class]->forgetCachedPermissions();
 
 
-        $super_admin_role = Role::create(['name' => 'Super Admin']);
+        $super_admin_role = getSuperAdminRoleName();
 
-        // create demo users
-        $admin = \App\User::where('email', 'arifkhn46@gmail.com')->first();
-        $admin->assignRole($super_admin_role);
+        // Seed the default permissions
+        $permissions = Permission::defaultPermissions();
+        foreach ($permissions as $perms) {
+            Permission::firstOrCreate(['name' => $perms]);
+        }
+
+        $this->command->info('Default Permissions added.');
+
+        // Confirm roles needed
+        if ($this->command->confirm("Create Roles for user, default is $super_admin_role  and Student? [y|N]", true)) {
+
+            // Ask for roles from input
+            $input_roles = $this->command->ask('Enter roles in comma separate format.', "$super_admin_role,Student");
+
+            // Explode roles
+            $roles_array = explode(',', $input_roles);
+
+            // add roles
+            foreach($roles_array as $role) {
+                $role = Role::firstOrCreate(['name' => trim($role)]);
+                if( $role->name == getSuperAdminRoleName() ) {
+                    // assign all permissions
+                    $role->syncPermissions(Permission::all());
+                    $this->command->info('Admin granted all the permissions');
+                } else {
+                    // for others by default only read access
+                    $role->syncPermissions(Permission::where('name', 'LIKE', 'view_%')->get());
+                }
+
+                // create one user for each role
+                $this->createUser($role);
+            }
+
+            $this->command->info('Roles ' . $input_roles . ' added successfully');
+
+        } else {
+            Role::firstOrCreate(['name' => 'Student']);
+            $this->command->info('Added only default user role.');
+        }
+
+        $user = factory(\App\User::class)->create();
+        // now lets seed some posts for demo
+        factory(\App\Task::class, 20)->states('assigned')->create(['assignee_id' => $user->id]);
+        $this->command->info('Some Posts data seeded.');
+        $this->command->warn('All done :)');
+    }
+
+    /**
+     * Create a user with given role
+     *
+     * @param $role
+     */
+    private function createUser($role)
+    {
+        $user = \App\User::where('email', 'arifkhn46@gmail.com')->first();
+        $user->assignRole($role->name);
+
+        if( $role->name == getSuperAdminRoleName() ) {
+            $this->command->info('Here is your admin details to login:');
+            $this->command->warn($user->email);
+            $this->command->warn('Password is "secret"');
+        }
     }
 }

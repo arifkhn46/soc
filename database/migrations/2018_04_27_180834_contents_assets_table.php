@@ -26,6 +26,6 @@ class ContentsAssetsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('table');
+        Schema::dropIfExists('contents_assets');
     }
 }

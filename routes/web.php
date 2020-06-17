@@ -67,5 +67,11 @@ Route::group([
 
 Route::middleware(['auth:sanctum', 'role:' . getSuperAdminRoleName()])->group(function () {
   Route::post('roles', 'RoleController@store')->name('role.store');
-  Route::get('roles/create', 'RoleController@create')->name('role.create');
+  Route::get('roles', 'RoleController@create')->name('role.create');
+  Route::put('roles/{role}/assign-permissions', 'RoleController@update')->name('roles.assign_permissions');
+  Route::get('roles/permissions', 'RoleController@index')->name('role.permissions');
+  Route::get('users', 'UserController@index')->name('users.list');
+  Route::patch('users/{user}/update', 'UserController@update')->name('users.update');
 });
+
+Route::get('student-app', 'WelcomeController@studentApp')->name('student_app');

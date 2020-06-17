@@ -20,6 +20,8 @@ class TaskController extends Controller
      */
     public function index()
     {
+        $this->authorize('index', Task::class);
+
         return new TaskCollection(auth()->user()->tasks()->get());
     }
 
@@ -31,6 +33,7 @@ class TaskController extends Controller
      */
     public function store(Request $request)
     {
+        $this->authorize('create', Task::class);
 
         $task = $this->validateRequest($request);
 
@@ -61,6 +64,8 @@ class TaskController extends Controller
      */
     public function update(Request $request, Task $task)
     {
+        $this->authorize('update', $task);
+
         $allowedStates = [
             TaskState::assigned(),
             TaskState::inProgress(),
@@ -131,7 +136,13 @@ class TaskController extends Controller
                     }
                 }
             }],
-            'start_at' => 'required|date_format:Y-m-d H:i:s',
+            'start_at' => ['bail', 'required' , 'date_format:Y-m-d H:i:s', function($attribute, $value, $fail) {
+                $start_date = \Carbon\Carbon::createFromDate($value);
+                
+                if ($start_date->isPast()) {
+                    $fail('Start date should be greater than ' . \Carbon\Carbon::now()->format('d-m-Y H:i:s'));
+                }
+            }],
             'end_at' => 'required|date_format:Y-m-d H:i:s|after:start_at',
         ] + $rules;
 

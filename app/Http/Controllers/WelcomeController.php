@@ -17,4 +17,9 @@ class WelcomeController extends Controller
         $courseTypes = CourseType::latest()->get();
         return view('welcome', ['courseTypes' => $courseTypes]);
     }
+
+    public function studentApp()
+    {
+        return view('student.spa');
+    }
 }

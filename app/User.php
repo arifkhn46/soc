@@ -7,10 +7,11 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Laravel\Sanctum\HasApiTokens;
 use Spatie\Permission\Traits\HasRoles;
+use App\Traits\AuthorizableTrait;
 
 class User extends Authenticatable
 {
-    use Notifiable, SoftDeletes, HasApiTokens, HasRoles;
+    use Notifiable, SoftDeletes, HasApiTokens, HasRoles, AuthorizableTrait;
 
     /**
      * The attributes that are mass assignable.
@@ -36,6 +37,11 @@ class User extends Authenticatable
      * @var array
      */
     protected $dates = ['deleted_at'];
+
+    public function getCreatedAtAttribute($date)
+    {
+        return \Carbon\Carbon::parse($date)->format('d/m/Y');   
+    }
 
     /**
      * Get the content repositories of the user.
@@ -101,5 +107,10 @@ class User extends Authenticatable
     public function getIsAdminTeacher()
     {
         return $this->isTeacher();
+    }
+
+    public function guardName()
+    {
+        return 'sanctum';
     }
 }

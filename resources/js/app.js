@@ -8,11 +8,14 @@ require('./bootstrap');
 
 window.Vue = require('vue');
 import vuetify from './plugins/vuetify';
+
 // import router from './router';
 
 import LoginFormComponent from './components/LoginFormComponent.vue';
 import HeaderComponent from './components/HeaderComponent.vue';
 import UserRolesComponent from './components/UserRolesComponent.vue';
+import RolesPermissions from './components/RolesPermissions.vue';
+import UsersListComponent from './components/UsersListComponent.vue';
 
 /**
  * The following block of code may be used to automatically register your
@@ -29,6 +32,8 @@ import UserRolesComponent from './components/UserRolesComponent.vue';
 Vue.component('header-component', HeaderComponent);
 Vue.component('login-form-component', LoginFormComponent);
 Vue.component('user-roles-component', UserRolesComponent);
+Vue.component('roles-permissions-component', RolesPermissions);
+Vue.component('users-list-component', UsersListComponent);
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to

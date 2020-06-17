@@ -1,27 +1,35 @@
-window._ = require('lodash');
 
-/**
- * We'll load jQuery and the Bootstrap jQuery plugin which provides support
- * for JavaScript based Bootstrap features such as modals and tabs. This
- * code may be modified to fit the specific needs of your application.
- */
+const axios = require('axios');
 
-try {
-    // window.Popper = require('popper.js').default;
-    // window.$ = window.jQuery = require('jquery');
+const httpClient = axios.create({
+    headers: {
+        baseURL: '/',
+        "Content-Type": "application/json",
+        "X-Requested-With": "XMLHttpRequest"
+    }
+  });
 
-    // require('bootstrap');
-} catch (e) {}
+httpClient.interceptors.response.use((response) => {
+    return response;
+}, (error) => {
+    
+    let data = error.response.data
 
-/**
- * We'll load the axios HTTP library which allows us to easily issue requests
- * to our Laravel back-end. This library automatically handles sending the
- * CSRF token as a header based on the value of the "XSRF" token cookie.
- */
+    if (data.errors && data.errors.length) {
+        for (var key in data.errors) {
+            error.response.data.message = data.errors[key][0]
+            break
+        }
+    }
 
-window.axios = require('axios');
+    if (!error.response.data.message || error.response.data.message === "")  {
+        error.response.data.message = "Something went wrong!";
+    }
 
-window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
+    return Promise.reject(error);
+});
+
+window.httpClient = httpClient;
 
 /**
  * Echo exposes an expressive API for subscribing to channels and listening

@@ -6,17 +6,6 @@
         align="center"
         justify="center"
     >
-        <v-col cols="12" v-if="errors.length">
-        <v-alert
-            dismissible
-            type="error"
-            icon="mdi-cloud-alert"
-            prominent
-            @input="onClose"
-        >
-            {{errors}}
-        </v-alert>
-        </v-col>
         <v-col
         cols="12"
         sm="8"
@@ -24,25 +13,25 @@
         >
         <v-card>
             <v-toolbar
-            color="primary"
-            dark
-            flat
+              color="primary"
+              dark
+              flat
             >
-            <v-toolbar-title>Login</v-toolbar-title>
-            <v-spacer></v-spacer>
+              <v-toolbar-title>Login</v-toolbar-title>
+              <v-spacer></v-spacer>
             </v-toolbar>
             <v-card-text>
-            <v-form
-            ref="form"
-            v-model="valid"
-            :lazy-validation="true"
-            >
+              <v-form
+                ref="form"
+                v-model="valid"
+                :lazy-validation="true"
+              >
                 <v-text-field
-                v-model="email"
-                :rules="emailRules"
-                label="E-mail"
-                prepend-icon="mdi-account"
-                required
+                  v-model="email"
+                  :rules="emailRules"
+                  label="E-mail"
+                  prepend-icon="mdi-account"
+                  required
                 ></v-text-field>
 
                 <v-text-field
@@ -58,14 +47,14 @@
             </v-form>
             </v-card-text>
             <v-card-actions>
-            <v-spacer></v-spacer>
-            <v-btn
-                color="primary"
-                :disabled="!valid"
-                @click="validate"
-            >
-            Login
-            </v-btn>
+              <v-spacer></v-spacer>
+              <v-btn
+                  color="primary"
+                  :disabled="!valid"
+                  @click="validate"
+              >
+              Login
+              </v-btn>
             </v-card-actions>
         </v-card>
         </v-col>
@@ -92,33 +81,23 @@ export default {
   methods: {
     validate () {
       if (this.$refs.form.validate()) {
-        axios.get('/sanctum/csrf-cookie').then(response => {
-            axios.post("/login", {email:this.email, password:this.password})
+        httpClient.get('/sanctum/csrf-cookie').then(response => {
+            httpClient.post("/login", {email:this.email, password:this.password})
                 .then(response => {
-                    this.resetErrors()
-                    location.reload()
+                  this.$toast.success('Success!' ,{
+                    dismissable: true,
+                    timeout: 5000,
+                  })
+                  location.reload()
                 })
                 .catch(error => {
-                    let data = error.response.data
-
-                    if (!isEmpty(data.errors)) {
-                        for (var key in data.errors) {
-                            this.errors = data.errors[key][0]
-                            break
-                        }
-                    }
-                    else {
-                        this.errors = data.message
-                    }
+                  this.$toast.error(error.response.data.message ,{
+                    dismissable: true,
+                    timeout: 5000,
+                  })
                 });
         });
       }
-    },
-    resetErrors() {
-      this.errors = ''
-    },
-    onClose() {
-      this.resetErrors()
     },
   }
 }

@@ -91,10 +91,38 @@ export default {
   },
   methods: {
     save() {
-
+      httpClient.post('/roles', { name: this.editedItem.name })
+        .then((response) => {
+          this.$toast.success('Role Created Successfully!' ,{
+            dismissable: true,
+            queueable: true,
+            timeout: 5000,
+          })
+          this.roles.push(response.data.role);
+          this.dialog = false;
+        })
+        .catch((errors) => {
+          this.$toast.error(errors.response.data.message ,{
+            dismissable: true,
+            queueable: true,
+            timeout: 5000,
+          })
+        })
     },
     close() {
       this.dialog = false
+    },
+    deleteItem(item) {
+      this.$toast.warning('This feature is pending!' ,{
+        dismissable: true,
+        timeout: 5000,
+      })
+    },
+    editItem(item) {
+      this.$toast.warning('This feature is pending!' ,{
+        dismissable: true,
+        timeout: 5000,
+      })
     }
   },
 }

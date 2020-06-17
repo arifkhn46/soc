@@ -7,22 +7,26 @@
       v-if="isAuthenticated"
     >
       <v-list dense>
-        <v-list-item link>
-          <v-list-item-action>
-            <v-icon>mdi-view-dashboard</v-icon>
-          </v-list-item-action>
-          <v-list-item-content>
-            <v-list-item-title>Dashboard</v-list-item-title>
-          </v-list-item-content>
+        <v-list-group
+          value="true"
+          prepend-icon="mdi-account-circle"
+          
+        >
+        <template v-slot:activator>
+          <v-list-item-title>Users</v-list-item-title>
+        </template>
+        <v-list-item
+          v-for="(menu, i) in adminMenu"
+          :key="i"
+          :href="menu[2]"
+          active-class="highlighted"
+        >
+          <v-list-item-title v-text="menu[0]"></v-list-item-title>
+          <v-list-item-icon>
+            <v-icon v-text="menu[1]"></v-icon>
+          </v-list-item-icon>
         </v-list-item>
-        <v-list-item link>
-          <v-list-item-action>
-            <v-icon>mdi-cog</v-icon>
-          </v-list-item-action>
-          <v-list-item-content>
-            <v-list-item-title>Settings</v-list-item-title>
-          </v-list-item-content>
-        </v-list-item>
+      </v-list-group>
       </v-list>
     </v-navigation-drawer>
 
@@ -33,8 +37,8 @@
     >
       <v-app-bar-nav-icon @click.stop="drawer = !drawer" v-if="isAuthenticated"></v-app-bar-nav-icon>
       <v-toolbar-title>SSCONLINECOACHING.COM</v-toolbar-title>
-      <v-spacer></v-spacer>
       <v-row v-if="!isAuthenticated">
+        <v-spacer></v-spacer>
         <div class="my-2">
           <v-btn depressed color="white" href="/login">Login</v-btn>
         </div>
@@ -51,6 +55,12 @@ export default {
   props:['user'],
   data: () => ({
     drawer: null,
+    model: 0,
+    adminMenu: [
+        ['Roles', 'mdi-account-settings', '/roles'],
+        ['Permissions', 'mdi-account-key', '/roles/permissions'],
+        ['Users', 'mdi-account', '/users'],
+      ],
   }),
   computed: {
     isAuthenticated() {

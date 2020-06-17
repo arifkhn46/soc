@@ -40,7 +40,7 @@ class User extends Authenticatable
 
     public function getCreatedAtAttribute($date)
     {
-        return \Carbon\Carbon::parse($date)->format('d/m/Y');   
+        return \Carbon\Carbon::parse($date)->format('d/m/Y');
     }
 
     /**

@@ -66,16 +66,17 @@ abstract class TestCase extends BaseTestCase
 
     protected function setupPermissions()
     {
-        $role = Role::firstOrCreate(['name' => 'User']);
+        $role = Role::firstOrCreate(['name' => 'User', 'guard_name' => 'sanctum']);
+
         Role::findOrCreate(getSuperAdminRoleName());
 
         if ($this->permissions) {
             $permissions = Permission::defaultPermissions();
 
             foreach ($permissions as $perms) {
-                Permission::firstOrCreate(['name' => $perms]);
+                Permission::firstOrCreate(['name' => $perms, 'guard_name' => 'sanctum']);
             }
-            
+
             $role->givePermissionTo($this->permissions);
         }
 

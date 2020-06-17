@@ -8,12 +8,13 @@ use Spatie\Permission\Models\Permission;
 use Spatie\Permission\Models\Role;
 use Spatie\Permission\PermissionRegistrar;
 use Tests\TestCase;
+use Illuminate\Http\Response;
 
 class ManageRolesTest extends TestCase
 {
     use RefreshDatabase;
 
-    protected $member, $admin;
+    protected $permissions = ['create_tasks'];
 
     public function setUp(): void
     {
@@ -21,49 +22,74 @@ class ManageRolesTest extends TestCase
 
         $this->setupPermissions();
 
-        $this->member = factory(\App\User::class)->create();
-
-        $this->admin = factory(\App\User::class)->create();
-
-        $this->admin->assignRole(getSuperAdminRoleName());
-
-    }
-
-    protected function setupPermissions()
-    {
-        Permission::findOrCreate('create roles');
-        Permission::findOrCreate('edit own posts');
-        Permission::findOrCreate('delete any role');
-
-        Role::findOrCreate('instructor')
-            ->givePermissionTo(['edit own posts']);
-
-        Role::findOrCreate(getSuperAdminRoleName())
-            ->givePermissionTo(['create roles', 'delete any role', 'edit own posts']);
-
-        $this->app->make(PermissionRegistrar::class)->registerPermissions();
     }
 
     /** @test */
     public function authorized_can_create_a_role()
     {
-        $this->signIn($this->admin);
+        $this->signIn(null, getSuperAdminRoleName());
         $role = make(\App\Model\Role::class);
 
         $this->post(route('role.store'), $role->toArray());
 
         $this->assertDatabaseHas('roles', ['name' => $role->name]);
+
+        $role2 = make(\App\Model\Role::class);
+        
+        $this->postJson(route('role.store'), $role2->toArray())
+            ->assertStatus(Response::HTTP_CREATED)
+            ->assertJson([
+                'role' => [
+                    'name' => $role2->name
+                ]
+            ]);
     }
 
     /** @test */
     public function unathorized_member_can_not_create_a_role()
     {
         $role = make(\App\Model\Role::class);
-
-        $this->actingAs($this->member)
-            ->post(route('role.create'), $role->toArray());
+        $this->signIn();
+        $this->post(route('role.create'), $role->toArray());
 
         $this->assertDatabaseMissing('roles', ['name' => $role->name]);
+
+    }
+
+    /** @test */
+    public function admin_can_assign_permissions_a_role()
+    {
+        $role = create(\App\Model\Role::class)->first();
+        
+        $this->signIn(null, \getSuperAdminRoleName());
+
+        $data = [
+            'permissions' => [
+                'create_tasks',
+                'view_own_tasks'
+            ]
+        ];
+
+        $this->putJson(route('roles.assign_permissions', ['role' => $role->id]), $data)
+            ->assertStatus(Response::HTTP_OK);
+    }
+
+    /** @test */
+    public function unathorized_member_can_not_assign_permissions()
+    {
+        $role = create(\App\Model\Role::class)->first();
+        
+        $this->signIn();
+
+        $data = [
+            'permissions' => [
+                'edit own posts',
+                'create posts'
+            ]
+        ];
+        
+        $this->putJson(route('roles.assign_permissions', ['role' => $role->id]), $data)
+            ->assertStatus(Response::HTTP_FORBIDDEN);
 
     }
 }

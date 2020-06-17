@@ -13,6 +13,8 @@ class CreateTaskTest extends TestCase
 
     use RefreshDatabase, WithFaker;
 
+    protected $permissions = ['create_tasks', 'edit_own_tasks', 'delete_own_tasks', 'view_own_tasks'];
+
     /**
      * Setup the test environment.
      *
@@ -25,10 +27,10 @@ class CreateTaskTest extends TestCase
         $this->createTaskRoute = route('api.task.create');
     }
 
+
     /** @test */
     public function a_task_requires_a_title()
     {
-        // $this->withoutExceptionHandling();
         $this->signIn();
 
         $this->jsonPost([], $this->createTaskRoute)
@@ -184,10 +186,19 @@ class CreateTaskTest extends TestCase
                 'errors' => ['start_at' => []]
             ]);
 
+        //yesterday
+        $yesterday = \Carbon\Carbon::now()->subDays(1)->format('Y-m-d H:i:s');
+        $task3 = $this->makeATask(['start_at' => $yesterday]);
+        $this->jsonPost($task3->toArray(), $this->createTaskRoute)
+            ->assertStatus(Response::HTTP_UNPROCESSABLE_ENTITY)
+            ->assertJson([
+                'errors' => ['start_at' => []]
+            ]);
 
-        $task3 = $this->makeATask();
 
-        $this->jsonPost($task3->toArray(),$this->createTaskRoute)
+        $task4 = $this->makeATask();
+
+        $this->jsonPost($task4->toArray(),$this->createTaskRoute)
             ->assertStatus(Response::HTTP_CREATED);
 
     }

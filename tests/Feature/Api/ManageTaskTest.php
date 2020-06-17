@@ -14,9 +14,25 @@ class ManageTaskTest extends TestCase
 {
     use RefreshDatabase;
 
+    protected $permissions = ['create_tasks', 'edit_own_tasks', 'delete_own_tasks', 'view_own_tasks'];
+
+    /**
+     * Setup the test environment.
+     *
+     * @return void
+     */
+    protected function setUp(): void
+    {
+        parent::setUp();
+
+        $this->setupPermissions();
+    }
+
     /** @test */
     public function a_user_can_fetch_its_non_deleted_tasks()
     {
+        // $this->withoutExceptionHandling();
+
         $this->signIn();
         $owner_id = auth()->id();
 
@@ -60,10 +76,10 @@ class ManageTaskTest extends TestCase
 
     /** @test */
     public function a_user_can_update_his_task_status()
-    {
+    {   
         $this->signIn();
 
-        $task = create('App\Task', [] , null, 'created')->first();
+        $task = create('App\Task', ['owner_id' => auth()->id()] , null, 'created')->first();
         $task_title = $task->title;
 
         $new_title = "Title Updated";
@@ -98,7 +114,7 @@ class ManageTaskTest extends TestCase
     {
         $this->signIn();
 
-        $task = create('App\Task', [] , null, 'assigned')->first();
+        $task = create('App\Task',  ['owner_id' => auth()->id()] , null, 'assigned')->first();
 
         $task->state = TaskState::created();
 

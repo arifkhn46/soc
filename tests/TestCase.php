@@ -6,27 +6,37 @@ use App\Exceptions\Handler;
 use Illuminate\Contracts\Debug\ExceptionHandler;
 use Illuminate\Foundation\Testing\TestCase as BaseTestCase;
 use Laravel\Sanctum\Sanctum;
+use App\Model\Permission;
+use App\Model\Role;
+use Spatie\Permission\PermissionRegistrar;
 
 abstract class TestCase extends BaseTestCase
 {
     use CreatesApplication;
 
+    protected $permissions = [];
 
-    protected function signIn($user = null)
+    protected function signIn($user = null, $role = 'User')
     {
         $user = $user ?: create('App\User');
         Sanctum::actingAs(
             $user,
             ['*']
         );
+
+        $this->setupPermissions();
+
+        if ($role && $this->permissions) {
+            $user->assignRole($role);
+        }
+
         return $this;
     }
 
     protected function signInAsAdmin()
     {
-        $admin = create('App\User', ['email' => 'arifkhn46@gmail.com']);
-        $this->actingAs($admin);
-        return $admin;
+        $this->permissions = ['create_tasks'];
+        return $this->signIn(null, \getSuperAdminRoleName());
     }
 
 
@@ -52,6 +62,24 @@ abstract class TestCase extends BaseTestCase
 
         return $this->json('POST', $route, $data);
 
+    }
+
+    protected function setupPermissions()
+    {
+        $role = Role::firstOrCreate(['name' => 'User']);
+        Role::findOrCreate(getSuperAdminRoleName());
+
+        if ($this->permissions) {
+            $permissions = Permission::defaultPermissions();
+
+            foreach ($permissions as $perms) {
+                Permission::firstOrCreate(['name' => $perms]);
+            }
+            
+            $role->givePermissionTo($this->permissions);
+        }
+
+        $this->app->make(PermissionRegistrar::class)->registerPermissions();
     }
 
 }

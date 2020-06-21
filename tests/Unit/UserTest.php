@@ -27,4 +27,15 @@ class UserTest extends TestCase
             $user->tasks
         );
     }
+
+    /** @test */
+    public function it_can_have_time_tables()
+    {
+        $user = create('App\User');
+
+        $this->assertInstanceOf(
+            'Illuminate\Database\Eloquent\Collection',
+            $user->timeTables
+        );
+    }
 }

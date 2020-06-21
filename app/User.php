@@ -60,6 +60,14 @@ class User extends Authenticatable
     }
 
     /**
+     * Get the user time tables.
+     */
+    public function timeTables()
+    {
+        return $this->hasMany(\App\Model\TimeTable::class, 'owner_id');
+    }
+
+    /**
      * Determine if the user is an administrator.
      *
      * @return bool

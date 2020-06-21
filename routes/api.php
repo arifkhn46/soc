@@ -31,6 +31,10 @@ Route::prefix('v1')->group(function(){
                 })->name('api.user.profile');
             Route::get('subjects', 'Api\SubjectController@details')->name('api.subject.list');
             Route::get('subjects/{subject}/chapters', 'Api\SubjectController@chapters')->name('api.subject.chapters');
-
         });
+
+        // Time Table
+        Route::post('time-table', 'Api\TimeTableController@store')->name('api.time_table.store');
+        Route::post('time-table/{time_table}/add-tasks', 'Api\TimeTableController@addTasks')->name('api.time_table.add_task');
+        Route::patch('time-table-task/{task}/update', 'Api\TimeTableTaskController@update')->name('api.time_table_task.update');
 });

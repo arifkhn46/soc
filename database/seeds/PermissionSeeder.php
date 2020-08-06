@@ -14,6 +14,7 @@ class PermissionSeeder extends Seeder
      */
     public function run()
     {
+        config(['auth.defaults.guard' => 'sanctum']);
         // Reset cached roles and permissions
         app()[PermissionRegistrar::class]->forgetCachedPermissions();
 
@@ -38,8 +39,8 @@ class PermissionSeeder extends Seeder
             $roles_array = explode(',', $input_roles);
 
             // add roles
-            foreach($roles_array as $role) {
-                $role = Role::firstOrCreate(['name' => trim($role)]);
+            foreach($roles_array as $role_to_create) {
+                $role = Role::firstOrCreate(['name' => trim($role_to_create)]);
                 if( $role->name == getSuperAdminRoleName() ) {
                     // assign all permissions
                     $role->syncPermissions(Permission::all());
@@ -72,15 +73,14 @@ class PermissionSeeder extends Seeder
      *
      * @param $role
      */
-    private function createUser($role)
-    {
-        $user = \App\User::where('email', 'arifkhn46@gmail.com')->first();
-        $user->assignRole($role->name);
-
-        if( $role->name == getSuperAdminRoleName() ) {
-            $this->command->info('Here is your admin details to login:');
-            $this->command->warn($user->email);
-            $this->command->warn('Password is "secret"');
+    private function createUser($role) {
+    
+        if($role->name == getSuperAdminRoleName()) {
+            $user = \App\User::where('email', 'arifkhn46@gmail.com')->first();
+        }else {
+            $user = factory(\App\User::class)->create();
         }
+
+        $user->assignRole($role->name);
     }
 }
